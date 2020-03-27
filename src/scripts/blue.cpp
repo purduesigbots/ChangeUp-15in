@@ -1,5 +1,4 @@
 #include "main.h"
 
-void blue(){
-
+void blue() {
 }
