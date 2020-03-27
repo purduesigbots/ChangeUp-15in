@@ -27,9 +27,6 @@ void opcontrol() {
 	else
 		speed = 0;
 
-	arcade(controller.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
-	       controller.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
-
 	move(speed);
 }
 

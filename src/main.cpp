@@ -1,7 +1,7 @@
 #include "main.h"
 #include "selection.h"
 
-pros::Controller controller(CONTROLLER_MASTER);
+pros::Controller master(CONTROLLER_MASTER);
 
 void initialize() {
 	selectorInit();
@@ -31,8 +31,8 @@ void autonomous() {
 
 void opcontrol() {
 	while (true) {
-		arcade(controller.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
-		       controller.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
+		arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
+		       master.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
 		delay(20);
 	}
 }
