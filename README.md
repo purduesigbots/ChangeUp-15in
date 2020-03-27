@@ -161,3 +161,6 @@ more consistent than either time based or the built in PID.
 The template contains a clang-format according to the [BLRS style guide](https://phabricator.purduesigbots.com/w/wiki/cs/design_pros2/styleguide/)
 This can be run by executing the `run-clang-format.sh` bash script and will
 automatically adjust all code in the project to follow the proper coding standards.
+To make life easier its best to install a clang-format extension to whatever editor
+your using. These extensions for [Atom (the PROS Editor)](https://atom.io/packages/clang-format) or [VS Code](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format)
+will automaticaly format your code to the standard everytime you save. 
