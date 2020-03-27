@@ -140,8 +140,8 @@ while(!intake::motors.getPosition() != 180)
 Documentation on how to use the built-in functions can be found [here](https://okapilib.github.io/OkapiLib/classokapi_1_1Motor.html).
 
 But even the built-in PID can often be insufficient. This is where an okapi
-async position controller comes in handy. They can be added to a subsystem below
-it's motor declaration following the structure laid out in the [documentation](https://okapilib.github.io/OkapiLib/md_docs_api_control.html)
+async position controller comes in handy. They can be added to a subsystem 
+following the format in the [documentation](https://okapilib.github.io/OkapiLib/md_docs_api_control.html)
 ```
 std::shared_ptr<okapi::AsyncPositionController<double, double>> controller = okapi::AsyncPosControllerBuilder()
   .withMotor(motors)
