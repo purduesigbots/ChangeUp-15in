@@ -4,6 +4,7 @@
 pros::Controller controller(CONTROLLER_MASTER);
 
 void initialize() {
+  selectorInit();
   initDrive();
   intake::init();
 }
@@ -28,9 +29,8 @@ void autonomous() {
 
 void opcontrol() {
   while (true) {
-    arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
-           master.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
-
+    arcade(controller.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
+           controller.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
     delay(20);
   }
 }
