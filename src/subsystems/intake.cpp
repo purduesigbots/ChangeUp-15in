@@ -4,30 +4,31 @@ namespace intake{
 
 okapi::MotorGroup motors = {5,-6};
 
+std::shared_ptr<okapi::AsyncPositionController<double, double>> controller = okapi::AsyncPosControllerBuilder()
+  .withMotor(motors)
+  .withGains({0.001, 0})
+  .build();
+
 void init() {
   motors.setGearing(okapi::AbstractMotor::gearset::green);
   motors.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
   motors.setEncoderUnits(okapi::AbstractMotor::encoderUnits::degrees);
 }
 
-/**************************************************/
-//basic control
 void move (int speed) {
   motors.moveVoltage(speed*120);
 }
 
-/**************************************************/
-//operator control
 void opcontrol() {
   static int speed;
 
   move(speed);
 
-  if(controller.get_digital(DIGITAL_R1))
+  if(master.get_digital(DIGITAL_R1))
     speed = 100;
-  else if(controller.get_digital(DIGITAL_R2))
+  else if(master.get_digital(DIGITAL_R2))
     speed = -100;
-  else if(controller.get_digital(DIGITAL_A))
+  else if(master.get_digital(DIGITAL_A))
     speed = -45;
   else
     speed = 0;

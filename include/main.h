@@ -19,7 +19,7 @@
 using namespace pros;
 using namespace greenhat;
 
-extern Controller controller;
+extern Controller master;
 
 #ifdef __cplusplus
 extern "C" {
