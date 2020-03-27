@@ -156,3 +156,8 @@ intake::controller->waitUntilSettled();
 
 The setup for this type of controller is a little verbose, but it can be much
 more consistent than either time based or the built in PID.
+
+## Code Formatting
+The template contains a clang-format according to the [BLRS style guide](https://phabricator.purduesigbots.com/w/wiki/cs/design_pros2/styleguide/)
+This can be run by executing the `run-clang-format.sh` bash script and will
+automatically adjust all code in the project to follow the proper coding standards.
