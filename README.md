@@ -1,12 +1,12 @@
 # BLRS Template
 
-###Introduction
+### Introduction
 This project is a starting point for all software sub-teams.
 It allows us to have a common code base to work from, speed up trouble shooting,
 and reduce the prerequisite knowledge required to create
 consistent autonomous programs.
 
-##Libraries
+## Libraries
 In order to reduce the amount of redundant code between the robots,
 we packaged the most important stuff into libraries for easy reuse.
 
@@ -16,17 +16,17 @@ Any function that moves the robot around the field will be controlled by functio
 located in this library. Documentation for it can be found [here](https://github.com/Marsgate/greenhatlib).
 This library was developed by Micah Rassi.
 
-###autoSelector
+### autoSelector
 This library handles the selection of the autonomous program for matches,
 hence the name. It creates a graphical menu on the brain's display to allow easy
 selection between the multiple autonomous programs. Documentation for it can be
 found [here](https://github.com/kunwarsahni01/Vex-Autonomous-Selector). This library was developed by Kunwar Sahni.
 
-##Project Structure
+## Project Structure
 The project structure is focused around dividing the subsystems and autons into
 separate files. The `main.cpp` should contain little to no actual code.
 
-###Subsystems
+### Subsystems
 The subsystems folder contains one file for each subsystem. The general template
 for subsystems should follow this pattern:
 ```
@@ -82,7 +82,7 @@ assigned to the subsystem. This approach can make some tasks easier, when knowin
 the previously assigned speed is useful, such as reducing the power of the
 subsystem when the driver releases all buttons.
 
-###The chassis subsystem
+### The chassis subsystem
 All configuration for the chassis can be done from the file:
 ```
 include/greenhat/config.h
@@ -104,20 +104,20 @@ any other measurement you choose. Just adjust the value until you achieve the
 desired movement. The same is true of the `DEGREE_CONSTANT`, which should be tuned
 to produce a consistent 90 degree turn.
 
-##Writing an autonomous
+## Writing an autonomous
 All autonomous programs are located in the `scripts` folder. By default there
 is just `red`, `blue`, and `skills`. The `macros.cpp` file is for putting
 reusable pieces of code for common actions. If a block of code is used more than
 once, you can often make it a macro. This improves program readability greatly.
 
-###Chassis movement
+### Chassis movement
 To start moving the robot around the field, you can use the `drive()` function
 and the `turn()` function supplied by Greenhat. The template is
 `using namespace greenhat;` by default, so all functions from the library are
 available with no prefix. To preform more complicated drive maneuvers, read the
 Greenhat documentation linked above.
 
-###Other subsystem movement
+### Other subsystem movement
 Other subsystems can be moved by accessing the move function in their namespace.
 ```
 intake::move(100);
