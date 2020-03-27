@@ -79,7 +79,7 @@ takes a number between -100 and 100. Which is much easier to use than the regula
 
 The `opcontrol()` function utilizes a static variable to keep track of the speed
 assigned to the subsystem. This approach can make some tasks easier by storing
-knowing the previously assigned motor speed.
+the previously assigned motor speed.
 
 ### The chassis subsystem
 All configuration for the chassis can be done from the file:
