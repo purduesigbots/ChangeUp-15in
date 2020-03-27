@@ -24,7 +24,7 @@ found [here](https://github.com/kunwarsahni01/Vex-Autonomous-Selector). This lib
 
 ## Project Structure
 The project structure is focused around dividing the subsystems and autons into
-separate files. The `main.cpp` should contain little to no actual code.
+separate files. The `main.cpp` should contain little actual code.
 
 ### Subsystems
 The subsystems folder contains one file for each subsystem. The general template
@@ -62,10 +62,10 @@ void opcontrol() {
 } //namespace intake
 ```
 
-The entire subsystem is placed into a namespace to allow a general naming
+The entire subsystem is placed into a unique namespace to allow a general naming
 convention to be applied to each subsystem.
 
-The motors (or singular motor) is declared in the okapi namespace. We use okapi
+The motors (or singular motor) are declared using okapi. We use okapi
 because of it's native support for motor groups, which allow for more compact and
 readable autonomous programs.
 
@@ -74,19 +74,16 @@ It allows the setting of gearing, brake mode, encoder units, and any other subsy
 specific initialization.
 
 The `move()` function is simply a shorthand for voltage based movement. The function
-takes a number between 0 and 100. Which is much easier to use than the regular
+takes a number between -100 and 100. Which is much easier to use than the regular
 `moveVoltage` function.
 
 The `opcontrol()` function utilizes a static variable to keep track of the speed
-assigned to the subsystem. This approach can make some tasks easier, when knowing
-the previously assigned speed is useful, such as reducing the power of the
-subsystem when the driver releases all buttons.
+assigned to the subsystem. This approach can make some tasks easier by storing
+knowing the previously assigned motor speed.
 
 ### The chassis subsystem
 All configuration for the chassis can be done from the file:
-```
-include/greenhat/config.h
-```
+`include/greenhat/config.h`
 
 This is where you can define which ports the drive motors are plugged into and
 what internal gearset to use.
@@ -131,15 +128,14 @@ delay(1000); // delay for 1 second
 intake::move(0);
 ```
 
-This type of time-based movement can good enough for many subsystems, but some
-may require more precision, such as lifts, flywheels, etc.
-In these cases PID is the best option. Vex motors have a built-in PID that can be
-used through the `moveVelocity`, `moveAbsolute`, and `moveRelative` commands.
+This type of time-based movement is good enough for many subsystems, but sometimes
+more precision is required. In these cases PID is the best option. 
+Vex motors have a built-in PID that can be used through the `moveVelocity`, `moveAbsolute`, and `moveRelative` commands.
 Here is an example of their usage:
 ```
 intake::motors.moveAbsolute(180); // move 180 degrees
-while(!intake::motors.isStopped())
-  delay(10); //wait until the motor stops moving
+while(!intake::motors.getPosition() != 180)
+  delay(10); //wait until the motor reaches the target
 ```
 Documentation on how to use the built-in functions can be found [here](https://okapilib.github.io/OkapiLib/classokapi_1_1Motor.html).
 
