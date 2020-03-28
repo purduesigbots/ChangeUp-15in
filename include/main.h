@@ -8,18 +8,8 @@
 #include "greenhat/api.h"
 
 // subsystems
-#include "subsystems/intake.hpp"
-
-// scripts
-#include "scripts/blue.hpp"
-#include "scripts/macros.hpp"
-#include "scripts/red.hpp"
-#include "scripts/skills.hpp"
-
 using namespace pros;
 using namespace greenhat;
-
-extern Controller master;
 
 #ifdef __cplusplus
 extern "C" {
