@@ -31,8 +31,17 @@ void autonomous() {
 
 void opcontrol() {
 	while (true) {
+		// button to start autonomous for testing
+		if (master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
+			autonomous();
+
+		// intake
+		intake::opcontrol();
+
+		// chassis
 		arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
-		       master.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
+		       master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
+
 		delay(20);
 	}
 }
