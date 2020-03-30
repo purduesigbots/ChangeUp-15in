@@ -1,10 +1,10 @@
 #include "main.h"
-#include "selection.h"
+#include "autoSelect/selection.h"
 
 pros::Controller master(CONTROLLER_MASTER);
 
 void initialize() {
-	selectorInit();
+	selector::init();
 	initDrive();
 	intake::init();
 }
@@ -16,7 +16,7 @@ void competition_initialize() {
 }
 
 void autonomous() {
-	switch (autonSelection) {
+	switch (selector::auton) {
 	case 1:
 		blue();
 		break;
