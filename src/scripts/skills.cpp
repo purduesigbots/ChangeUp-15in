@@ -1,5 +1,4 @@
 #include "main.h"
 
-void skills(){
-
+void skills() {
 }

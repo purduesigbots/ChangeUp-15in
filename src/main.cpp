@@ -1,10 +1,10 @@
 #include "main.h"
-#include "selection.h"
+#include "autoSelect/selection.h"
 
-pros::Controller controller(CONTROLLER_MASTER);
+pros::Controller master(CONTROLLER_MASTER);
 
 void initialize() {
-	selectorInit();
+	selector::init();
 	initDrive();
 	intake::init();
 }
@@ -16,7 +16,7 @@ void competition_initialize() {
 }
 
 void autonomous() {
-	switch (autonSelection) {
+	switch (selector::auton) {
 	case 1:
 		blue();
 		break;
@@ -31,8 +31,17 @@ void autonomous() {
 
 void opcontrol() {
 	while (true) {
-		arcade(controller.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
-		       controller.get_analog(ANALOG_LEFT_X) * (double)100 / 127);
+		// button to start autonomous for testing
+		if (master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
+			autonomous();
+
+		// intake
+		intake::opcontrol();
+
+		// chassis
+		arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
+		       master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
+
 		delay(20);
 	}
 }
