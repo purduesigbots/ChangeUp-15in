@@ -1,5 +1,5 @@
 # BLRS Template
-
+![PROS Project CI](https://github.com/Marsgate/blrs_template/workflows/PROS%20Project%20CI/badge.svg?branch=master)
 ### Introduction
 This project is a starting point for all software sub-teams.
 It allows us to have a common code base to work from, speed up trouble shooting,
