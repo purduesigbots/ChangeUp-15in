@@ -26,12 +26,7 @@ jobs:
         packages: https://github.com/purduesigbots/pros-cli/releases/download/3.1.4/pros_cli_v5-3.1.4-py3-none-any.whl
     - name: Testing PROS Install 
       run: prosv5 --version
-    - name: testing 
-      run: ls
-    - name: testing2 
-      run: cd ..
-    - name: testing4
-      run: ls  
-    - name: make
+    - name: Checkout
+      uses: actions/checkout@v2.0.0
+    - name: make  
       run: prosv5 make clean all
-
