@@ -14,6 +14,8 @@ jobs:
     steps:
     - name: arm-none-eabi-gcc
       uses: fiam/arm-none-eabi-gcc@v1
+      with:
+        release: '9-2019-q4'
     - name: Pip Installer
       uses: BSFishy/pip-action@v1
       with:
