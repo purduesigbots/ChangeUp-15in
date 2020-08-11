@@ -134,7 +134,7 @@ Vex motors have a built-in PID that can be used through the `moveVelocity`, `mov
 Here is an example of their usage:
 ```
 intake::motors.moveAbsolute(180); // move 180 degrees
-while(!intake::motors.getPosition() != 180)
+while(intake::motors.getPosition() != 180)
   delay(10); //wait until the motor reaches the target
 ```
 Documentation on how to use the built-in functions can be found [here](https://okapilib.github.io/OkapiLib/classokapi_1_1Motor.html).
