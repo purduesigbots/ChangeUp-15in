@@ -28,5 +28,9 @@ jobs:
       run: prosv5 --version
     - name: Checkout
       uses: actions/checkout@v2.0.0
+    - name: Submodule Checkout
+      uses: jwsi/submodule-checkout@v1
+      with:
+        ssh-key: '${{ secrets.DEPLOY_KEY }}'
     - name: make  
       run: prosv5 make clean all
