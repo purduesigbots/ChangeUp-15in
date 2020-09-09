@@ -8,7 +8,7 @@ namespace intake{
 extern okapi::MotorGroup motors;
 extern std::shared_ptr<okapi::AsyncPositionController<double, double>> controller;
 void init();
-void move();
+void move(int speed);
 void opcontrol();
 
 }
