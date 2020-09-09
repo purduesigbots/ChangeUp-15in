@@ -1,0 +1,3 @@
+[submodule "firmware/libblrs"]
+	path = firmware/libblrs
+	url = https://github.com/Marsgate/libblrs_2020.git

@@ -4,40 +4,6 @@
         "project_name": "blrs_template",
         "target": "v5",
         "templates": {
-            "autoSelect": {
-                "location": "C:\\Users\\micah\\AppData\\Roaming\\PROS\\templates\\autoSelect@2.1.4",
-                "metadata": {
-                    "origin": "local"
-                },
-                "name": "autoSelect",
-                "py/object": "pros.conductor.templates.local_template.LocalTemplate",
-                "supported_kernels": "^3.2.1",
-                "system_files": [
-                    "include\\autoSelect\\selection.h",
-                    "firmware\\autoSelect.a"
-                ],
-                "target": "v5",
-                "user_files": [],
-                "version": "2.1.4"
-            },
-            "greenhat": {
-                "location": "C:\\Users\\micah\\AppData\\Roaming\\PROS\\templates\\greenhat@1.1.1",
-                "metadata": {
-                    "origin": "local"
-                },
-                "name": "greenhat",
-                "py/object": "pros.conductor.templates.local_template.LocalTemplate",
-                "supported_kernels": "^3.2.1",
-                "system_files": [
-                    "include\\greenhat\\api.h",
-                    "include\\greenhat\\config.h",
-                    "firmware\\greenhat.a",
-                    "include\\greenhat\\drive.h"
-                ],
-                "target": "v5",
-                "user_files": [],
-                "version": "1.1.1"
-            },
             "kernel": {
                 "location": "C:\\Users\\micah\\AppData\\Roaming\\PROS\\templates\\kernel@3.2.1",
                 "metadata": {
