@@ -4,8 +4,34 @@
 pros::Controller master(CONTROLLER_MASTER);
 
 void initialize() {
-	selector::init();
-	initDrive();
+	//autonomous selector library
+	const char *selectorNames[] = {"Front","Back","Do Nothing",""};
+	selector::init(
+		360, // hue
+		1, // default auton
+		selectorNames
+	);
+
+	initDrive(
+		{1, 2}, // left motors
+		{-3, -4}, // right motors
+		200, // motor rpm
+
+		273, // ticks per distance unit (default = ft)
+		2.3, // ticks per degree
+
+		8, // acceleration slew
+		200, // deceleration slew (default = disabled)
+		2, // acceleration for arc turns
+
+		.3, // drive kp
+		.5, // drive kd
+		.8, // turn kp
+		3, // turn kd
+		.05 // arc kp
+	);
+
+	//subsystems
 	intake::init();
 }
 
