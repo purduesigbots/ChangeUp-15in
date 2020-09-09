@@ -83,23 +83,22 @@ the previously assigned motor speed.
 
 ### The chassis subsystem
 All configuration for the chassis can be done from the file:
-`include/greenhat/config.h`
+`main.cpp`
 
 This is where you can define which ports the drive motors are plugged into and
-what internal gearset to use.
+what internal gearset to use. Negative numbers mean reversed motor
 ```
-//negative numbers mean reversed motor
-#define LEFT_MOTORS 1, 2
-#define RIGHT_MOTORS -3, -4
-#define GEARSET green
+{1, 2}, // left motors
+{-3, -4}, // right motors
+200, // motor rpm
 ```
 
-Below that are the `DISTANCE_CONSTANT` and `DEGREE_CONSTANT`. These affect how
+Below that are the `distance_constant` and `degree_constant`. These affect how
 far the robot moves per unit during auton. When calling the function `drive(1)`
 the distance constant defines what `1` is. It can be 1 inch, 1 foot, 1 meter, or
-any other measurement you choose. Just adjust the value until you achieve the
-desired movement. The same is true of the `DEGREE_CONSTANT`, which should be tuned
-to produce a consistent 90 degree turn.
+any other measurement you choose. By default, we use feet for simplicity. Just
+adjust the value until you achieve the desired movement. The same is true of the
+`degree_constant`, which should be tuned to produce a consistent 90 degree turn.
 
 ## Writing an autonomous
 All autonomous programs are located in the `scripts` folder. By default there
@@ -129,7 +128,7 @@ intake::move(0);
 ```
 
 This type of time-based movement is good enough for many subsystems, but sometimes
-more precision is required. In these cases PID is the best option. 
+more precision is required. In these cases PID is the best option.
 Vex motors have a built-in PID that can be used through the `moveVelocity`, `moveAbsolute`, and `moveRelative` commands.
 Here is an example of their usage:
 ```
@@ -140,7 +139,7 @@ while(intake::motors.getPosition() != 180)
 Documentation on how to use the built-in functions can be found [here](https://okapilib.github.io/OkapiLib/classokapi_1_1Motor.html).
 
 But even the built-in PID can often be insufficient. This is where an okapi
-async position controller comes in handy. They can be added to a subsystem 
+async position controller comes in handy. They can be added to a subsystem
 following the format in the [documentation](https://okapilib.github.io/OkapiLib/md_docs_api_control.html)
 ```
 std::shared_ptr<okapi::AsyncPositionController<double, double>> controller = okapi::AsyncPosControllerBuilder()
@@ -163,4 +162,4 @@ This can be run by executing the `run-clang-format.sh` bash script and will
 automatically adjust all code in the project to follow the proper coding standards.
 To make life easier its best to install a clang-format extension to whatever editor
 your using. These extensions for [Atom (the PROS Editor)](https://atom.io/packages/clang-format) or [VS Code](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format)
-will automaticaly format your code to the standard everytime you save. 
+will automaticaly format your code to the standard everytime you save.
