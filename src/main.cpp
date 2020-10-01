@@ -13,8 +13,8 @@ void initialize() {
 	);
 
 	initDrive(
-		{1, 2}, // left motors
-		{-3, -4}, // right motors
+		{-10, -8}, // left motors
+		{9, 7}, // right motors
 		200, // motor rpm
 
 		273, // ticks per distance unit (default = ft)
