@@ -13,8 +13,8 @@ void initialize() {
 	);
 
 	initDrive(
-		{-10, -8}, // left motors
-		{9, 6}, // right motors
+		{-15, -18}, // left motors
+		{17, 20}, // right motors
 		200, // motor rpm
 
 		273, // ticks per distance unit (default = ft)
@@ -56,9 +56,9 @@ void autonomous() {
 }
 
 void opcontrol() {
-	pros::Motor roller_one (11);
-	pros::Motor roller_two (12);
-	pros::Motor intake_left (1);
+	pros::Motor roller_one (12);
+	pros::Motor roller_two (19);
+	pros::Motor intake_left (11);
 	pros::Motor intake_right (13);
 	while (true) {
 		// button to start autonomous for testing
