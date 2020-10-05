@@ -73,26 +73,24 @@ void opcontrol() {
 		       master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
 		if (master.get_digital(DIGITAL_R1)) {
-			roller_one.move(-200);
 			intake_left.move(200);
 			intake_right.move(-200);
 		} else if (master.get_digital(DIGITAL_R2)) {
-			roller_one.move(200);
 			intake_left.move(-200);
 			intake_right.move(200);
 		} else {
-			roller_one.move(0);
 			intake_left.move(0);
 			intake_right.move(0);
 		}
 
-		if (master.get_digital(DIGITAL_L1) || master.get_digital(DIGITAL_R2)) {
-			roller_two.move(-200);
-		} else if (master.get_digital(DIGITAL_R1)) {
-			roller_two.move(200);
-		} else {
-			roller_two.move(0);
-		}
+		if (master.get_digital(DIGITAL_L1)) roller_two.move(200);
+		else if (master.get_digital(DIGITAL_L2)) roller_two.move(-200);
+		else roller_two.move(0);
+
+		if (master.get_digital(DIGITAL_L1)) roller_one.move(-200);
+		else if (master.get_digital(DIGITAL_R1)) roller_one.move(-50);
+		else if (master.get_digital(DIGITAL_L2)) roller_one.move(200);
+		else roller_one.move(0);
 
 
 		delay(20);
