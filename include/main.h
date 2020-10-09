@@ -8,6 +8,8 @@
 
 // subsystems
 #include "subsystems/intake.hpp"
+#include "subsystems/roller.hpp"
+#include "subsystems/indexer.hpp"
 
 // scripts
 #include "scripts/blue.hpp"
