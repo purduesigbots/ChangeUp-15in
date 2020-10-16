@@ -1,14 +1,8 @@
 #include "main.h"
 
-namespace roller {
+namespace ejector {
 
-okapi::MotorGroup motors = {12};
-
-std::shared_ptr<okapi::AsyncPositionController<double, double>> controller =
-    okapi::AsyncPosControllerBuilder()
-        .withMotor(motors)
-        .withGains({0.001, 0})
-        .build();
+okapi::MotorGroup motors = {-19};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -28,11 +22,11 @@ void opcontrol() {
 	else if (master.get_digital(DIGITAL_L1))
 		speed = -100;
 	else if (master.get_digital(DIGITAL_R1))
-		speed = -40;
+		speed = -50;
 	else
 		speed = 0;
 
 	move(speed);
 }
 
-} // namespace roller
+} // namespace ejector

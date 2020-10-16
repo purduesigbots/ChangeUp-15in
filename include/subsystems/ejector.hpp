@@ -1,9 +1,9 @@
-#ifndef _INDEXER_H_
-#define _INDEXER_H_
+#ifndef _EJECTOR_H_
+#define _EJECTOR_H_
 
 #include "okapi/api.hpp"
 
-namespace indexer {
+namespace ejector {
 
 extern okapi::MotorGroup motors;
 extern std::shared_ptr<okapi::AsyncPositionController<double, double>>
@@ -12,6 +12,6 @@ void init();
 void move(int speed);
 void opcontrol();
 
-} // namespace indexer
+} // namespace ejector
 
 #endif

@@ -2,13 +2,7 @@
 
 namespace indexer {
 
-okapi::MotorGroup motors = {19};
-
-std::shared_ptr<okapi::AsyncPositionController<double, double>> controller =
-    okapi::AsyncPosControllerBuilder()
-        .withMotor(motors)
-        .withGains({0.001, 0})
-        .build();
+okapi::MotorGroup motors = {12};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -23,10 +17,12 @@ void move(int speed) {
 void opcontrol() {
 	static int speed;
 
-	if (master.get_digital(DIGITAL_L1))
+	if (master.get_digital(DIGITAL_L2))
 		speed = 100;
-	else if (master.get_digital(DIGITAL_L2))
+	else if (master.get_digital(DIGITAL_L1))
 		speed = -100;
+	else if (master.get_digital(DIGITAL_R1))
+		speed = -75; // formerly -40
 	else
 		speed = 0;
 
