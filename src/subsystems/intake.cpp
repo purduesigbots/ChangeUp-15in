@@ -2,7 +2,7 @@
 
 namespace intake {
 
-okapi::MotorGroup motors = {13, -11};
+okapi::MotorGroup motors = {-13, 11};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -17,9 +17,9 @@ void move(int speed) { // speed from -100 to 100
 void opcontrol() {
 	static int speed;
 
-	if (master.get_digital(DIGITAL_R2))
+	if (master.get_digital(DIGITAL_R1))
 		speed = 100;
-	else if (master.get_digital(DIGITAL_R1))
+	else if (master.get_digital(DIGITAL_R2))
 		speed = -100;
 	else
 		speed = 0;
