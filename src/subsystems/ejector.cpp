@@ -1,8 +1,8 @@
 #include "main.h"
 
-namespace intake {
+namespace ejector {
 
-okapi::MotorGroup motors = {-13, 11};
+okapi::MotorGroup motors = {19};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -10,21 +10,23 @@ void init() {
 	motors.setEncoderUnits(okapi::AbstractMotor::encoderUnits::degrees);
 }
 
-void move(int speed) { // speed from -100 to 100
+void move(int speed) {
 	motors.moveVoltage(speed * 120);
 }
 
 void opcontrol() {
 	static int speed;
 
-	if (master.get_digital(DIGITAL_R1))
+	if (master.get_digital(DIGITAL_L1))
 		speed = 100;
-	else if (master.get_digital(DIGITAL_R2))
+	else if (master.get_digital(DIGITAL_L2))
 		speed = -100;
+	else if (master.get_digital(DIGITAL_R1))
+		speed = 50;
 	else
 		speed = 0;
 
 	move(speed);
 }
 
-} // namespace intake
+} // namespace ejector
