@@ -288,6 +288,11 @@
                 "version": "4.0.4"
             }
         },
-        "upload_options": {}
+        "upload_options": {
+            "compress_bin": true,
+            "description": "Created with PROS",
+            "remote_name": "ChangeUp-15in",
+            "slot": 1
+        }
     }
 }
