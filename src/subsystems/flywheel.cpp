@@ -24,7 +24,7 @@ void opcontrol() {
 		if (line_sensor.get_value() > 1850)
 			speed = 50;
 		else
-			speed = -5;
+			speed = -15;
 	} else if (master.get_digital(DIGITAL_L2))
 		speed = -100;
 	else
