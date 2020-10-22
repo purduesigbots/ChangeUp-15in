@@ -43,10 +43,10 @@ void competition_initialize() {
 
 void autonomous() {
 	switch (selector::auton) {
-	case 1:
+	case -1:
 		blue();
 		break;
-	case -1:
+	case 1:
 		red();
 		break;
 	case 0:
