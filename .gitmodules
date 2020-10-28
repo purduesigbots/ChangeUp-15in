@@ -1,3 +1,0 @@
-[submodule "firmware/libblrs"]
-	path = firmware/libblrs
-	url = https://github.com/purduesigbots/libblrs_2020.git
