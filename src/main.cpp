@@ -9,23 +9,7 @@ void initialize() {
 	               1,   // default auton
 	               selectorNames);
 
-	chassis::init({-15, -18}, // left motors
-	          {17, 20},   // right motors
-	          200,        // motor rpm
-
-	          273, // ticks per distance unit (default = ft)
-	          2.3, // ticks per degree
-
-	          8,   // acceleration slew
-	          200, // deceleration slew (default = disabled)
-	          2,   // acceleration for arc turns
-
-	          .3, // drive kp
-	          .5, // drive kd
-	          .8, // turn kp
-	          3,  // turn kd
-	          .05 // arc kp
-	);
+	chassis::init();
 
 	// subsystems
 	intake::init();
