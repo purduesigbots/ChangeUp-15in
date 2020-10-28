@@ -4,7 +4,8 @@
 #define PROS_USE_SIMPLE_NAMES
 #define PROS_USE_LITERALS
 
-#include "greenhat/api.h"
+#include "ARMS/api.h"
+#include "ARMS/chassis.h"
 
 // subsystems
 #include "subsystems/ejector.hpp"
@@ -19,7 +20,6 @@
 #include "scripts/skills.hpp"
 
 using namespace pros;
-using namespace greenhat;
 
 extern Controller master;
 

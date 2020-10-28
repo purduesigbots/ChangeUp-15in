@@ -1,5 +1,4 @@
 #include "main.h"
-#include "autoSelect/selection.h"
 
 pros::Controller master(CONTROLLER_MASTER);
 
@@ -10,23 +9,7 @@ void initialize() {
 	               1,   // default auton
 	               selectorNames);
 
-	initDrive({-15, -18}, // left motors
-	          {17, 20},   // right motors
-	          200,        // motor rpm
-
-	          273, // ticks per distance unit (default = ft)
-	          2.3, // ticks per degree
-
-	          8,   // acceleration slew
-	          200, // deceleration slew (default = disabled)
-	          2,   // acceleration for arc turns
-
-	          .3, // drive kp
-	          .5, // drive kd
-	          .8, // turn kp
-	          3,  // turn kd
-	          .05 // arc kp
-	);
+	chassis::init();
 
 	// subsystems
 	intake::init();
@@ -74,7 +57,7 @@ void opcontrol() {
 		flywheel::opcontrol();
 
 		// chassis
-		arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
+		chassis::arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
 		       master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
 		delay(20);
