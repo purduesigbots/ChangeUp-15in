@@ -60,6 +60,8 @@ void opcontrol() {
 		chassis::arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
 		       master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
+		printf("%i \n", chassis::position());
+
 		delay(20);
 	}
 }
