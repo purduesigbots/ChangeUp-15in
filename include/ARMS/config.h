@@ -13,9 +13,9 @@ namespace chassis {
 #define DEGREE_CONSTANT 4.85   // ticks per degree
 
 // slew control (autonomous only)
-#define ACCEL_STEP 5    // smaller number = more slew
+#define ACCEL_STEP 5   // smaller number = more slew
 #define DECCEL_STEP 12 // 200 = no slew
-#define ARC_STEP 2      // acceleration for arcs
+#define ARC_STEP 2     // acceleration for arcs
 
 // pid constants
 #define LINEAR_KP 0.25
@@ -25,9 +25,8 @@ namespace chassis {
 #define ARC_KP .05
 
 // sensors
-#define IMU_PORT 0                       // port 0 for disabled
+#define IMU_PORT 0               // port 0 for disabled
 #define ENCODER_PORTS 0, 0, 0, 0 // port 0 for disabled
-#define ENCODERS_REVERSED false
 
 } // namespace chassis
 
