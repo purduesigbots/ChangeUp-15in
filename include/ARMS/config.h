@@ -19,12 +19,12 @@ namespace chassis {
 #define MIN_SPEED 15
 
 // pid constants
-#define LINEAR_KP 0.25
+#define LINEAR_KP 0.20
 #define LINEAR_KD .5
 #define TURN_KP .8
 #define TURN_KD 3
 #define ARC_KP .05
-#define DIF_KP .5
+#define DIF_KP 1
 
 // sensors
 #define IMU_PORT 0               // port 0 for disabled
