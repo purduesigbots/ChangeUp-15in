@@ -2,7 +2,7 @@
 
 namespace ejector {
 
-okapi::MotorGroup motors = {19};
+okapi::MotorGroup motors = {-19};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
