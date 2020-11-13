@@ -26,7 +26,7 @@ bool ejectorDetect() {
 bool colorDetect() {
 	if (selector::auton < 0)
 		return (color.get_hue() <= RED) ? true : false;
-	else
+	else if (selector::auton > 0)
 		return (color.get_hue() >= BLUE) ? true : false;
 }
 
