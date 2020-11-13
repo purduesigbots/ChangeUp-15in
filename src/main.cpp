@@ -13,6 +13,7 @@ void initialize() {
 	ejector::init();
 	indexer::init();
 	flywheel::init();
+	sensors::init();
 }
 
 void disabled() {
@@ -57,7 +58,7 @@ void opcontrol() {
 		chassis::arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
 		       master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
-		printf("%i \n", chassis::position());
+		printf("%.2f \n", chassis::position());
 
 		delay(20);
 	}

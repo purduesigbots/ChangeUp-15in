@@ -12,6 +12,7 @@
 #include "subsystems/flywheel.hpp"
 #include "subsystems/indexer.hpp"
 #include "subsystems/intake.hpp"
+#include "subsystems/sensors.hpp"
 
 // scripts
 #include "scripts/blue.hpp"
