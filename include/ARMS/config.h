@@ -37,13 +37,13 @@ namespace chassis {
 namespace selector {
 
 // Color of theme from 0-359(H part of HSV)
-#define HUE 360
+#define HUE 1
 
 // Default auton numbers
 #define DEFAULT 1
 
 // Names of autonomi, up to 10
-#define AUTONS "Front", "Back", "Do Nothing"
+#define AUTONS "Main Auton", "Do Nothing"
 
 } // namespace selector
 
