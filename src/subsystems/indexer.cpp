@@ -16,14 +16,17 @@ void move(int speed) {
 
 void opcontrol() {
 	static int speed;
+	static bool detected = false;
 
-	if (master.get_digital(DIGITAL_L1))
+	if (sensors::colorDetect())
 		speed = 100;
-	else if (master.get_digital(DIGITAL_R1))
-		speed = 75;
-	else if (master.get_digital(DIGITAL_L2))
-		speed = -100;
-	else
+	else if (master.get_digital(DIGITAL_L1)) // score ball
+		speed = 100;
+	else if (master.get_digital(DIGITAL_L2)) // outtake
+		speed = 100;
+	else if (master.get_digital(DIGITAL_R1)) {// run until dectected
+		speed = 50;
+	} else
 		speed = 0;
 
 	move(speed);
