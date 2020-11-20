@@ -2,26 +2,31 @@
 
 namespace sensors {
 
-#define LINE_THRESHOLD 2880
-#define BLUE 210
+#define FLYWHEEL_THRESHOLD 2850
+#define EJECTOR_THRESHOLD 2880
+#define BLUE 180
 #define RED 25
 
-ADIAnalogIn line_sensor('e');
-Optical color(9);
+ADIAnalogIn flywheel_sensor('e');
+ADIAnalogIn ejector_sensor('f');
+Optical color(7);
 
 void init() {
 	color.set_led_pwm(100);
 }
 
+bool flywheelDetect() {
+	return (flywheel_sensor.get_value() < FLYWHEEL_THRESHOLD);
+}
 
-bool lineDetect() {
-	return (line_sensor.get_value() < LINE_THRESHOLD);
+bool ejectorDetect() {
+	return (ejector_sensor.get_value() < EJECTOR_THRESHOLD);
 }
 
 bool colorDetect() {
 	if (selector::auton < 0)
 		return (color.get_hue() <= RED) ? true : false;
-	else
+	else if (selector::auton > 0)
 		return (color.get_hue() >= BLUE) ? true : false;
 }
 

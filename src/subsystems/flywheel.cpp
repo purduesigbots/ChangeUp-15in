@@ -3,11 +3,10 @@
 namespace flywheel {
 
 okapi::MotorGroup motors = {-10};
-ADIAnalogIn line_sensor('a');
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
-	motors.setBrakeMode(okapi::AbstractMotor::brakeMode::coast);
+	motors.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
 	motors.setEncoderUnits(okapi::AbstractMotor::encoderUnits::degrees);
 }
 
@@ -21,12 +20,12 @@ void opcontrol() {
 	if (master.get_digital(DIGITAL_L1))
 		speed = 100;
 	else if (master.get_digital(DIGITAL_R1)) {
-		if (line_sensor.get_value() > 1850)
-			speed = 50;
+		if (sensors::flywheelDetect())
+			speed = -10;
 		else
-			speed = -15;
+			speed = 50;
 	} else if (master.get_digital(DIGITAL_L2))
-		speed = -100;
+		speed = -40;
 	else
 		speed = 0;
 
