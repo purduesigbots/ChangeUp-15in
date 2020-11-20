@@ -3,7 +3,7 @@
 void red() {
 	// auton to pick up ball #1
 
-	//commented for testing/tuning turn function
+	// commented for testing/tuning turn function
 	intake::move(100);
 	chassis::move(50, 50);
 
@@ -25,12 +25,13 @@ void red() {
 	intake::move(100);
 	chassis::move(56, 50);
 
+	intake::move(0);
 	chassis::moveAsync(3, 25);
 
 	score(2);
-	chassis::voltage(100, -50);
+	intake::move(100);
+	delay(500);
 	score(1);
-	intake::move(0);
 
 	chassis::move(-24, 50);
 
@@ -38,8 +39,14 @@ void red() {
 	delay(250);
 	intake::move(0);
 
+	chassis::turnAbsolute(270, 50);
+	chassis::move(-44, 50);
+	chassis::turnAbsolute(180, 50);
 
-
-
-	//chassis::turn(90, 50); turn testing line
+	intake::move(100);
+	chassis::move(24, 50);
+	delay(250);
+	intake::move(0);
+	score(1);
+	chassis::move(-12, 50);
 }
