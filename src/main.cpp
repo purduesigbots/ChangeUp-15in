@@ -8,17 +8,17 @@ void initialize() {
 
 	chassis::init({-15, -18},  //Left motors
 	          {17,20},  //Right motors
-	          200, // gearset
-						45.0,  //distance constant
+	          600, // gearset
+						59,  //distance constant
 	          4.75,  //degree constant
 	          3, //acccel, step
 						2, //arc step
 	          .2, .75,  //linear kp, kd
-	          1, 6,  //turn kp, kd
+	          2, 7,  //turn kp, kd
 	          .05, //arc kp
-						1, //dif kp
-						0,  //IMU port
-	          {1,3,0},  //encoder ports
+						.05, //dif kp
+						16,  //IMU port
+	          {0, 0, 0},  //encoder ports
 	          0);  //expander port
 
 	// subsystems
