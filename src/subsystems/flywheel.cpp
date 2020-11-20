@@ -19,10 +19,13 @@ void opcontrol() {
 
 	if (master.get_digital(DIGITAL_L1))
 		speed = 100;
-	else if (master.get_digital(DIGITAL_R1) && !sensors::flywheelDetect()) {
-		speed = 50;
+	else if (master.get_digital(DIGITAL_R1)) {
+		if (sensors::flywheelDetect())
+			speed = -10;
+		else
+			speed = 50;
 	} else if (master.get_digital(DIGITAL_L2))
-		speed = -100;
+		speed = -40;
 	else
 		speed = 0;
 

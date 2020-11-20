@@ -24,9 +24,9 @@ void opcontrol() {
 		speed = 100;
 	else if (master.get_digital(DIGITAL_L2)) // outtake
 		speed = 100;
-	else if (master.get_digital(DIGITAL_R1)) {// run until dectected
+	else if (master.get_digital(DIGITAL_R1)) // run until dectected
 		speed = 50;
-	} else
+	else
 		speed = 0;
 
 	move(speed);

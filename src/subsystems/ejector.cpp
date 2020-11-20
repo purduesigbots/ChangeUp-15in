@@ -27,9 +27,9 @@ void opcontrol() {
 		speed = -100;
 	else if (master.get_digital(DIGITAL_L1)) // score
 		speed = 100;
-	else if (master.get_digital(DIGITAL_R1)) {
+	else if (master.get_digital(DIGITAL_R1))
 		speed = 50;
-	} else
+	else
 		speed = 0;
 
 	move(speed);
