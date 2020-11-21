@@ -8,6 +8,7 @@ void red() {
 	// second line ball
 	chassis::move(-12, 50);
 	chassis::turn(50, 50);
+	intake::move(50);
 	chassis::move(26, 50);
 
 	// spit balls across
@@ -49,20 +50,19 @@ void red() {
 	while (!sensors::colorDetect())
 		delay(20);
 	intake::move(0);
-	delay(2500);
-	flywheel::move(0);
+	delay(500);
+	intake::move(-100);
+	delay(1500);
 	indexer::move(0);
 	ejector::move(0);
-
-	// outtake blue ball
 	chassis::move(-24, 50);
-	intake::move(-50);
-	delay(500);
 	intake::move(0);
+	flywheel::move(0);
+	delay(4000);
 
 	// align middle home row
 	chassis::turnAbsolute(270, 50);
-	chassis::move(-40, 50);
+	chassis::move(-46, 50);
 	chassis::turnAbsolute(180, 50);
 
 	// score middle home row
@@ -72,4 +72,6 @@ void red() {
 	intake::move(0);
 	score(1);
 	chassis::move(-12, 50);
+	chassis::turn(60);
+	chassis::move(20);
 }
