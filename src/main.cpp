@@ -6,20 +6,20 @@ void initialize() {
 	// autonomous selector library
 	selector::init();
 
-	chassis::init({-15, -18},  //Left motors
-	          {17,20},  //Right motors
-	          600, // gearset
-						59,  //distance constant
-	          4.75,  //degree constant
-	          3, //acccel, step
-						2, //arc step
-	          .2, .75,  //linear kp, kd
-	          2, 7,  //turn kp, kd
-	          .05, //arc kp
-						.05, //dif kp
-						16,  //IMU port
-	          {0, 0, 0},  //encoder ports
-	          0);  //expander port
+	chassis::init({-15, -18}, // Left motors
+	              {17, 20},   // Right motors
+	              600,        // gearset
+	              59,         // distance constant
+	              4.75,       // degree constant
+	              3,          // acccel, step
+	              2,          // arc step
+	              .2, .75,    // linear kp, kd
+	              2, 7,       // turn kp, kd
+	              .05,        // arc kp
+	              .08,        // dif kp
+	              16,         // IMU port
+	              {0, 0, 0},  // encoder ports
+	              0);         // expander port
 
 	// subsystems
 	intake::init();
@@ -69,7 +69,7 @@ void opcontrol() {
 
 		// chassis
 		chassis::arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
-		       master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
+		                master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
 		printf("%.2f \n", chassis::position());
 
