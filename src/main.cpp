@@ -7,7 +7,7 @@ void initialize() {
 	selector::init();
 
 	chassis::init({-15, -18},  //Left motors
-	          {17,20},  //Right motors
+	          {17,19},  //Right motors
 	          200, // gearset
 						45.0,  //distance constant
 	          4.75,  //degree constant
