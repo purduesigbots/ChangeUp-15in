@@ -6,7 +6,7 @@ okapi::MotorGroup motors = {-14};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
-	motors.setBrakeMode(okapi::AbstractMotor::brakeMode::coast);
+	motors.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
 	motors.setEncoderUnits(okapi::AbstractMotor::encoderUnits::degrees);
 }
 
