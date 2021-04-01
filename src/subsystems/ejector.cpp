@@ -2,7 +2,7 @@
 
 namespace ejector {
 
-okapi::MotorGroup motors = {-19};
+okapi::MotorGroup motors = {-8};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -20,7 +20,7 @@ void opcontrol() {
 
 	if (sensors::colorDetect())
 		eject = true;
-	else if (sensors::ejectorDetect())
+	else if (sensors::ejectorDetect() || master.get_digital(DIGITAL_R2))
 		eject = false;
 
 	if (master.get_digital(DIGITAL_L2) || eject) // outtake
