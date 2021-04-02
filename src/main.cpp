@@ -1,15 +1,15 @@
 #include "main.h"
 
 pros::Controller master(CONTROLLER_MASTER);
-const double tpu = 18.125;
+const double tpu = 18.15;
 void initialize() {
-	selector::init(360);
+	selector::init();
 
 	chassis::init({-15, -18}, {17, 19}, // motors
 	              600,                  // gearset
 	              tpu, 4.75,            // TPU
 	              12,                   // setle time
-	              6, 5,                 // linear/angular thresholds
+	              1, .5,                // linear/angular thresholds
 	              2, 2,                 // regular/arc slew
 	              7,                    // imu port
 	              {-1, 3, 0},           // encoder ports
@@ -17,14 +17,14 @@ void initialize() {
 	              10                    // joystick threshold
 	);
 
-	pid::init(false,    // debug output
-	          .24, .68, // linear constants
-	          1, 6,     // angular contants
-	          0, 0,     // linear point constants
-	          0, 0,     // angular point constants
-	          .05,      // arc kp
-	          0,        // dif kp
-	          10        // min error
+	pid::init(false,   // debug output
+	          .24, .6, // linear constants
+	          1, 6,    // angular contants
+	          0, 0,    // linear point constants
+	          0, 0,    // angular point constants
+	          .05,     // arc kp
+	          0,       // dif kp
+	          10       // min error
 	);
 	// subsystems
 	intake::init();

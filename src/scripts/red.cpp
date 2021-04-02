@@ -3,39 +3,32 @@
 void red() {
 	// first line ball
 	intake::move(100);
-	chassis::move(50, 50);
+	chassis::move(46);
 
 	// second line ball
-	chassis::move(-12, 50);
-	chassis::turn(50, 50);
-	intake::move(50);
-	chassis::move(26, 50);
+	chassis::move(-12);
+	chassis::turnAbsolute(-65);
+	// delay(2000); //anti collision delay
+	chassis::move(22, 35);
 
-	// spit balls across
-	chassis::move(-12, 50);
-	chassis::turnAbsolute(315, 50);
-	intake::move(-50);
+	// spit balls out
+	chassis::move(-22);
+	intake::move(-55);
 	delay(1000);
 	intake::move(0);
 
-	// descore edge goal
-	chassis::turnAbsolute(287, 50);
+	// score edge goal
+	chassis::turnAbsolute(65);
 	intake::move(100);
-	chassis::move(35, 40);
+	chassis::move(31, 50);
 	delay(500);
 	intake::move(0);
-
-	// outtake edge goal blue ball
-	chassis::move(-5, 50);
-	chassis::turnAbsolute(287);
-	chassis::move(-28, 50);
-	intake::move(-50);
-	delay(600);
-	intake::move(0);
+	score(1);
+	chassis::move(-12);
 
 	// corner goal ball
 	runUntilFull();
-	chassis::turnAbsolute(218, 50);
+	chassis::turnAbsolute(142, 50);
 	intake::move(100);
 	chassis::move(56, 50);
 	intake::move(0);
