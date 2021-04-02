@@ -47,8 +47,9 @@ void red() {
 	flywheel::move(100);
 	indexer::move(100);
 	ejector::move(100);
-	while (!sensors::colorDetect())
-		delay(20);
+	delay(1000);
+	// while (!sensors::colorDetect())
+	// 	delay(20);
 	intake::move(0);
 	delay(500);
 	intake::move(-100);
