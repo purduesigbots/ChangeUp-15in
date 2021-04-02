@@ -109,12 +109,12 @@ void holoAsync(double distance, double angle, int max = 100);
 /**
  * Perform a chassis movement and wait until settled
  */
-void move(double sp, int max = 100);
+void move(double sp, int max = 80);
 
 /**
  * Perform a turn movement and wait until settled
  */
-void turn(double sp, int max = 100);
+void turn(double sp, int max = 50);
 
 /**
  * Perform an absolute turn movement and wait until settled (only works with
