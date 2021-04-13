@@ -2,7 +2,7 @@
 
 namespace intake {
 
-okapi::MotorGroup motors = {-13, 1};
+okapi::MotorGroup motors = {-2, 7};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);

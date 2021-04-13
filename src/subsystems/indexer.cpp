@@ -2,7 +2,7 @@
 
 namespace indexer {
 
-okapi::MotorGroup motors = {-14};
+okapi::MotorGroup motors = {-10};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
