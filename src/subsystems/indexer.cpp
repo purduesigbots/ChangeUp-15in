@@ -21,7 +21,7 @@ void opcontrol() {
 	// if (sensors::colorDetect())
 	// 	speed = 100;
 	if (master.get_digital(DIGITAL_L1)) // score ball
-		speed = 100;
+		speed = 75;
 	else if (master.get_digital(DIGITAL_L2)) // outtake
 		speed = 50;
 	else if (master.get_digital(DIGITAL_R1)) // run until dectected
