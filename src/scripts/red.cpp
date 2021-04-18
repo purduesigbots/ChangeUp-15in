@@ -2,6 +2,7 @@
 
 void red()
 {
+	chassis::useVelocity=true;
 	// first line ball
 	intake::move(100);
 	chassis::move(46);

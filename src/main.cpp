@@ -3,7 +3,7 @@
 pros::Controller master(CONTROLLER_MASTER);
 const double tpu = 18.15;
 void initialize() {
-	selector::init();
+	selector::init(360,-1);
 
 	chassis::init({-1, -3}, {4, 6}, // motors
 	              600,              // gearset
@@ -12,18 +12,18 @@ void initialize() {
 	              1, .5,            // linear/angular thresholds
 	              2, 2,             // regular/arc slew
 	              5,                // imu port
-	              {1, -3, 0},       // encoder ports
+	              {0, 0, 0},       // encoder ports
 	              0,                // expander port
 	              10                // joystick threshold
 	);
 
 	pid::init(false,   // debug output
-	          .24, .6, // linear constants
+	          .20, .05, // linear constants
 	          1, 6,    // angular contants
 	          0, 0,    // linear point constants
 	          0, 0,    // angular point constants
 	          .05,     // arc kp
-	          .005,       // dif kp
+	          0.1,       // dif kp
 	          10       // min error
 	);
 	// subsystems
@@ -76,7 +76,8 @@ void opcontrol() {
 		chassis::arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
 		                master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
-		printf("%.2f \n", chassis::position() / tpu);
+		//printf("%.2f \n", chassis::position() / tpu);
+		printf("%.2f \n", chassis::difference());
 
 		delay(20);
 	}
