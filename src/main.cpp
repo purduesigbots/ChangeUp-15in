@@ -12,7 +12,7 @@ void initialize() {
 	              1, .5,            // linear/angular thresholds
 	              2, 2,             // regular/arc slew
 	              5,                // imu port
-	              {-1, 3, 0},       // encoder ports
+	              {1, -3, 0},       // encoder ports
 	              0,                // expander port
 	              10                // joystick threshold
 	);
