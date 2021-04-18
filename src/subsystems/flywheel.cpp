@@ -26,6 +26,8 @@ void opcontrol() {
 			speed = 50;
 	} else if (master.get_digital(DIGITAL_L2))
 		speed = -40;
+	else if (master.get_digital(DIGITAL_X))
+		speed = -100;
 	else
 		speed = 0;
 
