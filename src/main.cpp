@@ -23,7 +23,7 @@ void initialize() {
 	          0, 0,    // linear point constants
 	          0, 0,    // angular point constants
 	          .05,     // arc kp
-	          0,       // dif kp
+	          .005,       // dif kp
 	          10       // min error
 	);
 	// subsystems

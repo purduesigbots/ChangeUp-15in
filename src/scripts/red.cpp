@@ -1,6 +1,7 @@
 #include "main.h"
 
-void red() {
+void red()
+{
 	// first line ball
 	intake::move(100);
 	chassis::move(46);
