@@ -1,21 +1,20 @@
 #include "main.h"
+#include "subsystems/intake.hpp"
 
-void red()
-{
-	chassis::useVelocity=true;
+void red() {
+	chassis::useVelocity = true;
 	// first line ball
 	intake::move(120);
-	chassis::move(135, 55);
+	chassis::move(48, 55);
 
 	// second line ball
-	chassis::move(-25,30);
-	chassis::turnAbsolute(-63,50);
-	// delay(2000); //anti collision delay
-	chassis::move(73, 25);
+	chassis::move(-10, 30);
+	chassis::turnAbsolute(-64, 20);
+	chassis::move(24, 25);
 
 	// spit balls out
-	chassis::move(-63);
-	chassis::turnAbsolute(-90,50);
+	chassis::move(-24, 50);
+	chassis::turnAbsolute(-80, 20);
 	intake::move(-100);
 	indexer::move(-15);
 	delay(1000);
@@ -23,56 +22,45 @@ void red()
 	indexer::move(0);
 
 	// score edge goal
-	chassis::turnAbsolute(66,50);
+	chassis::turnAbsolute(62, 20);
 	intake::move(100);
-	chassis::move(90, 50);
+	chassis::move(28, 50);
 	delay(500);
 	intake::move(0);
 	score(1);
-	chassis::move(-110,50);
+	chassis::move(-36, 50);
 
 	// corner goal ball
-	//runUntilFull();
-	chassis::turnAbsolute(139, 50);
-	intake::move(100);
-	chassis::move(165, 50);
-	score(1);
-	delay(200);
-	intake::move(0);
-
-	// score corner goal
-	chassis::moveAsync(3, 25);
-	score(1);
-	intake::move(100);
-	flywheel::move(100);
-	indexer::move(100);
-	ejector::move(100);
-	delay(1000);
-	// while (!sensors::colorDetect())
-	// 	delay(20);
-	intake::move(0);
-	delay(500);
+	chassis::turnAbsolute(90, 20);
 	intake::move(-100);
-	delay(1500);
+	indexer::move(-100);
+	flywheel::move(-100);
+	delay(400);
 	indexer::move(0);
-	ejector::move(0);
-	chassis::move(-24, 50);
-	intake::move(0);
 	flywheel::move(0);
-	delay(4000);
+	chassis::turnAbsolute(137, 20);
+	intake::move(100);
+	chassis::move(53, 50);
+	score(2);
+	intake::move(0);
+	chassis::move(-20, 30);
 
 	// align middle home row
-	chassis::turnAbsolute(270, 50);
-	chassis::move(-46, 50);
-	chassis::turnAbsolute(180, 50);
-
-	// score middle home row
-	intake::move(100);
-	chassis::move(24, 50);
-	delay(250);
-	intake::move(0);
-	score(1);
-	chassis::move(-12, 50);
-	chassis::turn(60);
-	chassis::move(20);
+	chassis::turnAbsolute(90, 20);
+	delay(8000);
+	intake::move(-100);
+	indexer::move(-100);
+	flywheel::move(-100);
+	chassis::move(-50, 50);
+	chassis::turnAbsolute(180, 20);
+	indexer::move(0);
+	flywheel::move(0);
+	/*
+	  // score middle home row
+	  intake::move(100);
+	  chassis::move(24, 50);
+	  score(1);
+	  intake::move(0);
+	  chassis::move(-12, 50);
+	    */
 }

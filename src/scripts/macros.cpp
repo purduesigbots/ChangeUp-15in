@@ -14,7 +14,7 @@ void score(int num) {
 	bool detected = sensors::flywheelDetect();
 
 	flywheel::move(100);
-	ejector::move(35);
+	ejector::move(100);
 	indexer::move(60);
 
 	while (i < num) {
@@ -30,7 +30,7 @@ void score(int num) {
 		}
 	}
 	indexer::move(0);
-	delay(200);
+	delay(75);
 	ejector::move(0);
 	flywheel::move(0);
 }
