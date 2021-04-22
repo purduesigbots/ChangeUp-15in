@@ -4,25 +4,26 @@ void red()
 {
 	chassis::useVelocity=true;
 	// first line ball
-	intake::move(100);
-	chassis::move(46);
+	intake::move(120);
+	chassis::move(135, 55);
 
 	// second line ball
-	chassis::move(-12);
-	chassis::turnAbsolute(-65);
+	chassis::move(-25,30);
+	chassis::turnAbsolute(-63,65);
 	// delay(2000); //anti collision delay
-	chassis::move(22, 35);
+	chassis::move(60, 25);
 
 	// spit balls out
-	chassis::move(-22);
-	intake::move(-55);
+	chassis::move(60);
+	chassis::turnAbsolute(-90,65);
+	intake::move(-100);
 	delay(1000);
 	intake::move(0);
 
 	// score edge goal
-	chassis::turnAbsolute(65);
-	intake::move(100);
-	chassis::move(31, 50);
+	chassis::turnAbsolute(63);
+	intake::move(130);
+	chassis::move(70, 50);
 	delay(500);
 	intake::move(0);
 	score(1);

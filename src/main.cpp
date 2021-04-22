@@ -3,7 +3,7 @@
 pros::Controller master(CONTROLLER_MASTER);
 const double tpu = 18.15;
 void initialize() {
-	selector::init(360,-1);
+	selector::init(360,1);
 
 	chassis::init({-1, -3}, {4, 6}, // motors
 	              600,              // gearset
@@ -18,7 +18,7 @@ void initialize() {
 	);
 
 	pid::init(false,   // debug output
-	          .20, .05, // linear constants
+	          .10, .005, // linear constants
 	          1, 6,    // angular contants
 	          0, 0,    // linear point constants
 	          0, 0,    // angular point constants
