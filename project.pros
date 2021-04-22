@@ -5,7 +5,7 @@
         "target": "v5",
         "templates": {
             "ARMS": {
-                "location": "C:\\Users\\micah\\AppData\\Roaming\\PROS\\templates\\ARMS@1.2.20",
+                "location": "C:\\Users\\micah\\AppData\\Roaming\\PROS\\templates\\ARMS@1.2.21",
                 "metadata": {
                     "origin": "local"
                 },
@@ -14,18 +14,18 @@
                 "supported_kernels": "^3.4.0",
                 "system_files": [
                     "include\\ARMS\\purepursuit.h",
-                    "include\\ARMS\\arc.h",
                     "include\\ARMS\\chassis.h",
-                    "firmware\\ARMS.a",
-                    "include\\ARMS\\api.h",
-                    "include\\ARMS\\pid.h",
                     "include\\ARMS\\config.h",
+                    "include\\ARMS\\pid.h",
+                    "include\\ARMS\\odom.h",
+                    "firmware\\ARMS.a",
                     "include\\ARMS\\selector.h",
-                    "include\\ARMS\\odom.h"
+                    "include\\ARMS\\arc.h",
+                    "include\\ARMS\\api.h"
                 ],
                 "target": "v5",
                 "user_files": [],
-                "version": "1.2.20"
+                "version": "1.2.21"
             },
             "kernel": {
                 "location": "C:\\Users\\micah\\AppData\\Roaming\\PROS\\templates\\kernel@3.4.0",
