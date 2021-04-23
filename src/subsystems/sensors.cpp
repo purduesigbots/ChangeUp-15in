@@ -10,6 +10,7 @@ namespace sensors {
 
 ADIAnalogIn flywheel_sensor('e');
 ADIAnalogIn ejector_sensor('f');
+Distance distance(11);
 // Optical color(7);
 
 void init() {
@@ -22,6 +23,10 @@ bool flywheelDetect() {
 
 bool ejectorDetect() {
 	return (ejector_sensor.get_value() < EJECTOR_THRESHOLD);
+}
+
+bool wallDetect() {
+	return distance.get() < 5;
 }
 
 /*bool colorDetect() {
