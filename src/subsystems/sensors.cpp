@@ -11,10 +11,10 @@ namespace sensors {
 ADIAnalogIn flywheel_sensor('e');
 ADIAnalogIn ejector_sensor('f');
 Distance distance(11);
-// Optical color(7);
+Optical color(15);
 
 void init() {
-	// color.set_led_pwm(100);
+	color.set_led_pwm(100);
 }
 
 bool flywheelDetect() {
@@ -29,11 +29,13 @@ bool wallDetect() {
 	return distance.get() < 5;
 }
 
-/*bool colorDetect() {
-  if (selector::auton < 0)
-    return (color.get_hue() <= RED) ? true : false;
-  else if (selector::auton > 0)
-    return (color.get_hue() >= BLUE) ? true : false;
-}*/
+bool colorDetect() {
+	if (selector::auton < 0)
+		return (color.get_hue() <= RED) ? true : false;
+	else if (selector::auton > 0)
+		return (color.get_hue() >= BLUE) ? true : false;
+	else
+		return false;
+}
 
 } // namespace sensors
