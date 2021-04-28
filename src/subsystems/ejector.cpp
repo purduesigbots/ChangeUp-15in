@@ -18,10 +18,10 @@ void opcontrol() {
 	static int speed;
 	static bool eject = false;
 
-	// if (sensors::colorDetect())
-	// 	eject = true;
-	// else if (sensors::ejectorDetect() || master.get_digital(DIGITAL_R2))
-	// 	eject = false;
+	if (sensors::colorDetect())
+		eject = true;
+	else if (sensors::ejectorDetect() || master.get_digital(DIGITAL_R2))
+		eject = false;
 
 	if (master.get_digital(DIGITAL_L2) || eject) // outtake
 		speed = -100;
