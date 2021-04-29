@@ -1,4 +1,5 @@
 #include "main.h"
+#include "subsystems/sensors.hpp"
 
 pros::Controller master(CONTROLLER_MASTER);
 const double tpu = 55;
@@ -77,7 +78,6 @@ void opcontrol() {
 		                master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
 
 		// printf("%.2f \n", chassis::position() / tpu);
-		printf("%.2f \n", chassis::difference());
 
 		delay(20);
 	}

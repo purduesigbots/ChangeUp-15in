@@ -3,14 +3,13 @@
 namespace sensors {
 
 #define FLYWHEEL_THRESHOLD 2800
-#define EJECTOR_THRESHOLD 2800
+#define EJECTOR_THRESHOLD 2850
 
 #define BLUE 180
 #define RED 25
 
 ADIAnalogIn flywheel_sensor('e');
 ADIAnalogIn ejector_sensor('f');
-Distance distance(11);
 Optical color(15);
 
 void init() {
@@ -25,17 +24,19 @@ bool ejectorDetect() {
 	return (ejector_sensor.get_value() < EJECTOR_THRESHOLD);
 }
 
-bool wallDetect() {
-	return distance.get() < 5;
+bool prox() {
+	return color.get_proximity() > 50;
 }
 
 bool colorDetect() {
-	if (selector::auton < 0)
-		return (color.get_hue() <= RED) ? true : false;
-	else if (selector::auton > 0)
-		return (color.get_hue() >= BLUE) ? true : false;
-	else
-		return false;
+	if (color.get_proximity() > 250) {
+
+		if (selector::auton < 0)
+			return (color.get_hue() <= RED) ? true : false;
+		if (selector::auton > 0)
+			return (color.get_hue() >= BLUE) ? true : false;
+	}
+	return false;
 }
 
 } // namespace sensors

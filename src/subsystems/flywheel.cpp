@@ -15,18 +15,25 @@ void move(int speed) {
 }
 
 void opcontrol() {
+	static bool detect = false;
 	static int speed;
 
-	if (master.get_digital(DIGITAL_L1))
+	if (master.get_digital(DIGITAL_L1)) {
+		detect = false;
 		speed = 100;
-	else if (master.get_digital(DIGITAL_R1)) {
-		if (sensors::flywheelDetect())
-			speed = -10;
-		else
+	} else if (master.get_digital(DIGITAL_R1)) {
+		if (sensors::flywheelDetect()) {
+			detect = true;
+		}
+		if (detect) {
+			speed = -15;
+		} else {
 			speed = 50;
-	} else if (master.get_digital(DIGITAL_L2))
+		}
+	} else if (master.get_digital(DIGITAL_L2)) {
+		detect = false;
 		speed = -40;
-	else if (master.get_digital(DIGITAL_X))
+	} else if (master.get_digital(DIGITAL_X))
 		speed = -100;
 	else
 		speed = 0;
