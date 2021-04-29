@@ -74,8 +74,15 @@ void opcontrol() {
 		flywheel::opcontrol();
 
 		// chassis
-		chassis::arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127,
-		                master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127);
+		// scale turnSpeed with a parabolic function
+		double turnInput = master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127.0;
+		double turnSpeed = turnInput * 0.09;
+		turnSpeed *= turnSpeed;
+		turnSpeed += 10;
+		if (turnInput < 0)
+			turnSpeed *= -1;
+		chassis::arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127.0,
+		                turnSpeed);
 
 		// printf("%.2f \n", chassis::position() / tpu);
 
