@@ -30,11 +30,9 @@ void opcontrol() {
 			speed = 50;
 	}
 	if (master.get_digital(DIGITAL_L1)) // score ball
-		speed = 50;
-	if (sensors::prox() && speed > 0)
-		speed = 40;
+		speed = 80;
 	if (sensors::colorDetect())
-		speed = 50;
+		speed = 80;
 
 	move(speed);
 }

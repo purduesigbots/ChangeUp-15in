@@ -1,4 +1,5 @@
 #include "main.h"
+#include "sensors.hpp"
 
 namespace ejector {
 
@@ -16,12 +17,35 @@ void move(int speed) {
 
 void opcontrol() {
 	static int speed;
-	static bool eject = false;
+	static int eject = 0;
+	static int count = 0;
+	static bool ejecting = false;
 
-	if (sensors::colorDetect())
-		eject = true;
-	else if (sensors::ejectorDetect() || master.get_digital(DIGITAL_R2))
-		eject = false;
+	if (sensors::colorDetect()) {
+		if (eject == 0)
+			eject = 1;
+		else if (ejecting)
+			eject = 2;
+	}
+
+	if (sensors::ejectorDetect() && eject) {
+		ejecting = true;
+	}
+
+	if (ejecting)
+		count += 10;
+
+	if (count > 80) {
+		eject -= 1;
+		count = 0;
+		ejecting = false;
+	}
+
+	if (master.get_digital(DIGITAL_R2)) {
+		eject = 0;
+		count = 0;
+		ejecting = false;
+	}
 
 	if (master.get_digital(DIGITAL_L2) || eject) // outtake
 		speed = -100;
