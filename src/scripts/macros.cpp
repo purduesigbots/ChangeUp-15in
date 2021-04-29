@@ -3,8 +3,10 @@
 void runUntilFull() {
 	while (!sensors::flywheelDetect()) {
 		flywheel::move(70);
+		ejector::move(60);
 		indexer::move(100);
 	}
+	ejector::move(0);
 	flywheel::move(0);
 	indexer::move(0);
 }

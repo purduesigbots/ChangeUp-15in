@@ -5,20 +5,25 @@ void red() {
 	chassis::useVelocity = true;
 
 	// deploy
+
+	chassis::move(-4);
+	delay(500);
 	flywheel::move(-100);
 	intake::move(-100);
 	ejector::move(100);
 	delay(500);
-	flywheel::move(0);
 	intake::move(0);
+	delay(250);
+	flywheel::move(0);
 	ejector::move(0);
 
 	// first line ball
 	intake::move(100);
-	chassis::move(53, 55);
+	runUntilFull();
+	chassis::move(54, 100);
 
 	// second line ball
-	chassis::move(-13, 30);
+	chassis::move(-14, 30);
 	chassis::turnAbsolute(-60, 20);
 	chassis::move(23.5, 25);
 
@@ -32,15 +37,16 @@ void red() {
 	indexer::move(0);
 
 	// score edge goal
-	chassis::turnAbsolute(63.7, 20);
+	chassis::turnAbsolute(64, 20);
 	intake::move(100);
-	chassis::move(29, 50);
+	chassis::move(29, 25);
 	delay(200);
 	intake::move(0);
 	intake::move(-100);
 	score(1);
 	intake::move(-100);
-	chassis::move(-37, 50);
+	chassis::move(-10, 15);
+	chassis::move(-27, 55);
 	intake::move(0);
 
 	// corner goal ball
@@ -51,9 +57,9 @@ void red() {
 	delay(400);
 	indexer::move(0);
 	flywheel::move(0);
-	chassis::turnAbsolute(137, 20);
+	chassis::turnAbsolute(138, 20);
 	intake::move(100);
-	chassis::move(59, 50);
+	chassis::move(59, 75);
 	score(2);
 	intake::move(0);
 	intake::move(-100);
@@ -63,17 +69,21 @@ void red() {
 	// align middle home row
 	chassis::turnAbsolute(-90, 30);
 	chassis::useVelocity = false;
-	chassis::move(-12, 20);
+	chassis::tank(-20, -20);
 	chassis::useVelocity = true;
+	delay(1700);
+	chassis::tank(0, 0);
 	runUntilFull();
 	delay(6000);
 	indexer::move(-30);
 	flywheel::move(-80);
 	ejector::move(-100);
-	chassis::move(65.3, 50);
+	intake::move(-100);
+	chassis::move(64, 75);
 	indexer::move(0);
 	flywheel::move(0);
 	ejector::move(0);
+	intake::move(0);
 	chassis::turnAbsolute(180, 20);
 	indexer::move(0);
 	flywheel::move(0);
