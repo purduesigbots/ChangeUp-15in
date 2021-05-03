@@ -2,7 +2,7 @@
 #include "subsystems/sensors.hpp"
 
 pros::Controller master(CONTROLLER_MASTER);
-const double tpu = 55;
+const double tpu = 59;
 void initialize() {
 	selector::init(360, 1);
 
@@ -10,7 +10,7 @@ void initialize() {
 	              600,              // gearset
 	              tpu, 4.75,        // TPU
 	              12,               // setle time
-	              2, 1,             // linear/angular thresholds
+	              .5, 1,            // linear/angular thresholds
 	              2, 2,             // regular/arc slew
 	              5,                // imu port
 	              {0, 0, 0},        // encoder ports
@@ -18,14 +18,14 @@ void initialize() {
 	              10                // joystick threshold
 	);
 
-	pid::init(false, // debug output
-	          .5, 5, // linear constants
-	          1, 6,  // angular contants
-	          0, 0,  // linear point constants
-	          0, 0,  // angular point constants
-	          .05,   // arc kp
-	          0.1,   // dif kp
-	          10     // min error
+	pid::init(false,   // debug output
+	          .08, .1, // linear constants
+	          1, 6,    // angular contants
+	          0, 0,    // linear point constants
+	          0, 0,    // angular point constants
+	          .05,     // arc kp
+	          0,       // dif kp
+	          10       // min error
 	);
 	// subsystems
 	intake::init();

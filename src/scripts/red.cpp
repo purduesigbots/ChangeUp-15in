@@ -1,33 +1,32 @@
+#include "macros.hpp"
 #include "main.h"
 #include "subsystems/intake.hpp"
+#include "subsystems/sensors.hpp"
 
 void red() {
-	// deploy
 
-	chassis::tank(-30, -30);
-	delay(500);
+	// deploy
+	chassis::tank(-20, -20);
+	delay(300);
 	flywheel::move(-100);
 	indexer::move(-100);
 	intake::move(-100);
-	ejector::move(100);
 	delay(800);
 	intake::move(0);
-
-	chassis::useVelocity = true;
 
 	// first line ball
 	runUntilFullAsync();
 	intake::move(100);
-	chassis::move(58, 100);
+	chassis::move(60, 50);
 
 	// second line ball
-	chassis::move(-14, 30);
-	chassis::turnAbsolute(-60, 20);
+	chassis::move(-13, 30);
+	chassis::turnAbsolute(-65, 50);
 	chassis::move(23.5, 25);
 
 	// spit balls out
-	chassis::move(-20.5, 50);
-	chassis::turnAbsolute(-80, 20);
+	chassis::move(-19.5, 50);
+	chassis::turnAbsolute(-90, 50);
 	intake::move(-75);
 	indexer::move(-15);
 	delay(1000);
@@ -35,62 +34,57 @@ void red() {
 	indexer::move(0);
 
 	// score edge goal
-	chassis::turnAbsolute(64, 20);
+	chassis::turnAbsolute(62.5, 50);
 	intake::move(100);
-	chassis::move(29, 25);
-	delay(200);
-	intake::move(0);
-	intake::move(-100);
+	chassis::move(27, 25);
+	waitOnColor(2000);
+	chassis::tank(20, 20);
+	delay(300);
 	score(1);
-	intake::move(-100);
-	chassis::move(-10, 15);
-	chassis::move(-27, 55);
+	delay(1000);
+	chassis::move(-39, 55);
 	intake::move(0);
 
 	// corner goal ball
-	chassis::turnAbsolute(90, 20);
+	chassis::turnAbsolute(90, 100);
 	intake::move(-100);
 	indexer::move(-100);
 	flywheel::move(-100);
 	delay(400);
 	indexer::move(0);
 	flywheel::move(0);
-	chassis::turnAbsolute(138, 20);
+	chassis::turnAbsolute(137, 50);
 	intake::move(100);
-	chassis::move(59, 75);
+	chassis::move(59, 50);
 	score(2);
-	intake::move(0);
 	intake::move(-100);
-	chassis::move(-15, 30);
+	chassis::move(-18, 30);
 	intake::move(0);
 
-	// align middle home row
-	chassis::turnAbsolute(-90, 30);
-	chassis::useVelocity = false;
+	// align mwith wall and wait
+	chassis::turnAbsolute(-90, 50);
 	chassis::tank(-20, -20);
-	chassis::useVelocity = true;
-	delay(1700);
+	delay(2400);
 	chassis::tank(0, 0);
 	runUntilFull();
-	delay(6000);
+	delay(4500);
+
+	// eject ball
 	indexer::move(-30);
 	flywheel::move(-80);
 	ejector::move(-100);
 	intake::move(-100);
-	chassis::move(64, 75);
-	indexer::move(0);
-	flywheel::move(0);
-	ejector::move(0);
-	intake::move(0);
-	chassis::turnAbsolute(180, 20);
-	indexer::move(0);
-	flywheel::move(0);
+
+	// drive to middle goal
+	chassis::move(62, 75);
+	stopAll();
+	chassis::turnAbsolute(180, 50);
 
 	// score middle home row
 	intake::move(100);
-	chassis::move(24, 50);
-	delay(500);
-	intake::move(0);
+	indexer::move(60);
+	chassis::move(26, 25);
+	waitOnColor(2000);
 	score(1);
 	chassis::move(-12, 50);
 }
