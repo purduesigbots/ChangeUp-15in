@@ -29,6 +29,8 @@ void opcontrol() {
 		else
 			speed = 50;
 	}
+	if (master.get_digital(DIGITAL_X))
+		speed = -100;                     // deploy
 	if (master.get_digital(DIGITAL_L1)) // score ball
 		speed = 80;
 	if (sensors::colorDetect())

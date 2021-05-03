@@ -2,6 +2,7 @@
 #define _MACROS_HPP_
 
 void runUntilFull();
+void runUntilFullAsync();
 void score(int num = 1);
 
 #endif

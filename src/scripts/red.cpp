@@ -2,25 +2,23 @@
 #include "subsystems/intake.hpp"
 
 void red() {
-	chassis::useVelocity = true;
-
 	// deploy
 
-	chassis::move(-4);
+	chassis::tank(-30, -30);
 	delay(500);
 	flywheel::move(-100);
+	indexer::move(-100);
 	intake::move(-100);
 	ejector::move(100);
-	delay(500);
+	delay(800);
 	intake::move(0);
-	delay(250);
-	flywheel::move(0);
-	ejector::move(0);
+
+	chassis::useVelocity = true;
 
 	// first line ball
+	runUntilFullAsync();
 	intake::move(100);
-	runUntilFull();
-	chassis::move(54, 100);
+	chassis::move(58, 100);
 
 	// second line ball
 	chassis::move(-14, 30);
