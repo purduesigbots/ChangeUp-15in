@@ -6,5 +6,6 @@ void runUntilFull();
 void runUntilFullAsync();
 void score(int num = 1);
 void stopAll();
+void eject();
 
 #endif

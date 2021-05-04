@@ -1,3 +1,4 @@
+#include "ARMS/chassis.h"
 #include "macros.hpp"
 #include "main.h"
 #include "subsystems/intake.hpp"
@@ -34,8 +35,10 @@ void red() {
 	indexer::move(0);
 
 	// score edge goal
-	chassis::turnAbsolute(62.5, 50);
+	chassis::turnAbsolute(64, 50);
+	flywheel::move(-30); // roll the red ball back a little
 	intake::move(100);
+	indexer::move(60);
 	chassis::move(27, 25);
 	waitOnColor(2000);
 	chassis::tank(20, 20);
@@ -45,14 +48,12 @@ void red() {
 	chassis::move(-39, 55);
 	intake::move(0);
 
-	// corner goal ball
-	chassis::turnAbsolute(90, 100);
-	intake::move(-100);
-	indexer::move(-100);
-	flywheel::move(-100);
+	// eject blue
+	eject();
 	delay(400);
-	indexer::move(0);
-	flywheel::move(0);
+	stopAll();
+
+	// corner goal
 	chassis::turnAbsolute(137, 50);
 	intake::move(100);
 	chassis::move(59, 50);
@@ -67,13 +68,9 @@ void red() {
 	delay(2400);
 	chassis::tank(0, 0);
 	runUntilFull();
-	delay(4500);
 
 	// eject ball
-	indexer::move(-30);
-	flywheel::move(-80);
-	ejector::move(-100);
-	intake::move(-100);
+	eject();
 
 	// drive to middle goal
 	chassis::move(62, 75);
@@ -87,4 +84,9 @@ void red() {
 	waitOnColor(2000);
 	score(1);
 	chassis::move(-12, 50);
+
+	chassis::turnAbsolute(315, 50);
+	chassis::move(36);
+	eject();
+	delay(3000);
 }

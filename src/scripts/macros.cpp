@@ -63,3 +63,10 @@ void stopAll() {
 	flywheel::move(0);
 	ejector::move(0);
 }
+
+void eject() {
+	indexer::move(-30);
+	flywheel::move(-80);
+	ejector::move(-100);
+	intake::move(-100);
+}
