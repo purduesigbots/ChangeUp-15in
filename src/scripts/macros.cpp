@@ -65,8 +65,18 @@ void stopAll() {
 }
 
 void eject() {
-	indexer::move(-30);
+	indexer::move(-20);
 	flywheel::move(-80);
 	ejector::move(-100);
 	intake::move(-100);
+}
+
+void runUntilFullReverse() {
+	int count = 0;
+	while (!sensors::flywheelDetect() && count < 1000) {
+		flywheel::move(-50);
+		count += 10;
+		delay(10);
+	}
+	flywheel::move(0);
 }

@@ -3,6 +3,7 @@
 
 void waitOnColor(int expiration);
 void runUntilFull();
+void runUntilFullReverse();
 void runUntilFullAsync();
 void score(int num = 1);
 void stopAll();
