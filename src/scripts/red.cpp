@@ -8,7 +8,7 @@ void red() {
 
 	// deploy
 	chassis::tank(-20, -20);
-	delay(300);
+	delay(500);
 	flywheel::move(-100);
 	indexer::move(-100);
 	intake::move(-100);
@@ -23,19 +23,19 @@ void red() {
 	// second line ball
 	chassis::move(-13, 30);
 	chassis::turnAbsolute(-65, 50);
-	chassis::move(23.5, 25);
+	chassis::move(22, 25);
 
 	// spit balls out
-	chassis::move(-19.5, 50);
+	chassis::move(-18, 50);
 	chassis::turnAbsolute(-90, 50);
-	intake::move(-75);
+	intake::move(-50);
 	indexer::move(-15);
 	delay(1000);
 	intake::move(0);
 	indexer::move(0);
 
 	// score edge goal
-	chassis::turnAbsolute(64, 50);
+	chassis::turnAbsolute(64.5, 50);
 	flywheel::move(-30); // roll the red ball back a little
 	intake::move(100);
 	indexer::move(60);
@@ -44,13 +44,14 @@ void red() {
 	chassis::tank(20, 20);
 	delay(300);
 	score(1);
-	delay(1000);
-	chassis::move(-39, 55);
+	delay(800);
+	chassis::fast(-5, 20);
+	chassis::move(-30, 75);
 	intake::move(0);
 
 	// eject blue
 	eject();
-	delay(400);
+	delay(1000);
 	stopAll();
 
 	// corner goal
@@ -65,7 +66,7 @@ void red() {
 	// align mwith wall and wait
 	chassis::turnAbsolute(-90, 50);
 	chassis::tank(-20, -20);
-	delay(2400);
+	delay(2000);
 	chassis::tank(0, 0);
 	runUntilFull();
 
@@ -83,9 +84,10 @@ void red() {
 	chassis::move(26, 25);
 	waitOnColor(2000);
 	score(1);
-	chassis::move(-12, 50);
 
-	chassis::turnAbsolute(315, 50);
+	// put bot in the middle of the field for driver control
+	chassis::move(-10, 50);
+	chassis::turnAbsolute(305, 50);
 	chassis::move(36);
 	eject();
 	delay(3000);
