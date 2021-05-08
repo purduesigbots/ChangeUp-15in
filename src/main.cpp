@@ -55,7 +55,7 @@ void autonomous() {
 }
 
 void opcontrol() {
-	bool flywheelDetect = false;
+	bool flywheelBall = false;
 	int ejectBalls = 0;
 	int ejectCount = 0;
 	while (true) {
