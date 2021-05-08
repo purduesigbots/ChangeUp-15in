@@ -101,11 +101,12 @@ void opcontrol() {
 
 		// manual eject
 		if (master.get_digital(DIGITAL_L2)) {
-			indexer::speed = -25;
-			flywheel::speed = -40;
+			if (indexer::speed == 0)
+				indexer::speed = -25;
+			if (flywheel::speed == 0)
+				flywheel::speed = -40;
 			flywheelBall = false;
-			if (ejectBalls)
-				ejector::speed = -100;
+			ejector::speed = -100;
 		}
 
 		// auto eject
@@ -118,10 +119,12 @@ void opcontrol() {
 		}
 		if (sensors::ejectorDetect() && ejectBalls)
 			ejectCount = 80;
-		if (ejectCount > 0)
+		if (ejectCount > 0) {
 			ejectCount -= 10;
-		else
+		} else
 			ejectBalls--;
+		if (ejectBalls)
+			ejector::speed = -100;
 
 		// deploy
 		if (master.get_digital(DIGITAL_X)) {
