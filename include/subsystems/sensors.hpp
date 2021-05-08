@@ -6,8 +6,8 @@ namespace sensors {
 void init();
 bool flywheelDetect();
 bool ejectorDetect();
-bool prox();
 bool colorDetect();
 
 } // namespace sensors
+
 #endif

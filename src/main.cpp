@@ -1,5 +1,4 @@
 #include "main.h"
-#include "subsystems/sensors.hpp"
 
 pros::Controller master(CONTROLLER_MASTER);
 const double tpu = 59;
@@ -56,22 +55,80 @@ void autonomous() {
 }
 
 void opcontrol() {
+	bool flywheelDetect = false;
+	int ejectBalls = 0;
+	int ejectCount = 0;
 	while (true) {
 		// button to start autonomous for testing
 		if (master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
 			autonomous();
 
+		// stop all subsystems
+		intake::speed = 0;
+		ejector::speed = 0;
+		indexer::speed = 0;
+		flywheel::speed = 0;
+
 		// intake
-		intake::opcontrol();
+		if (master.get_digital(DIGITAL_R1)) {
+			intake::speed = 100;
+			ejector::speed = 50;
+			indexer::speed = 50;
+			flywheel::speed = 50;
+			if (sensors::flywheelDetect())
+				flywheelBall = true;
+			if (flywheelBall) {
+				// run flywheel backward and the indexer slower if a ball is at the top
+				flywheel::speed = -15;
+				indexer::speed = 20;
+			}
+		}
 
-		// ejector
-		ejector::opcontrol();
+		// outtake and ejector reset
+		if (master.get_digital(DIGITAL_R2)) {
+			intake::speed = -100;
+			ejectCount = 0;
+			ejectBalls = 0;
+		}
 
-		// indexer
-		indexer::opcontrol();
+		// score
+		if (master.get_digital(DIGITAL_L1)) {
+			indexer::speed = 80;
+			ejector::speed = 100;
+			flywheel::speed = 100;
+			flywheelBall = false;
+		}
 
-		// flywheel
-		flywheel::opcontrol();
+		// manual eject
+		if (master.get_digital(DIGITAL_L2)) {
+			indexer::speed = -25;
+			flywheel::speed = -40;
+			flywheelBall = false;
+			if (ejectBalls)
+				ejector::speed = -100;
+		}
+
+		// auto eject
+		if (sensors::colorDetect()) {
+			indexer::speed = 80;
+			if (ejectBalls == 0)
+				ejectBalls = 1;
+			else if (ejectCount > 0)
+				ejectBalls = 2;
+		}
+		if (sensors::ejectorDetect() && ejectBalls)
+			ejectCount = 80;
+		if (ejectCount > 0)
+			ejectCount -= 10;
+		else
+			ejectBalls--;
+
+		// deploy
+		if (master.get_digital(DIGITAL_X)) {
+			intake::speed = -100;
+			indexer::speed = -100;
+			flywheel::speed = -100;
+		}
 
 		// chassis
 		// scale turnSpeed with a parabolic function
@@ -84,8 +141,12 @@ void opcontrol() {
 		chassis::arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127.0,
 		                turnSpeed);
 
-		// printf("%.2f \n", chassis::position() / tpu);
+		// update subsystems
+		intake::move(intake::speed);
+		ejector::move(ejector::speed);
+		indexer::move(indexer::speed);
+		flywheel::move(flywheel::speed);
 
-		delay(20);
+		delay(10);
 	}
 }

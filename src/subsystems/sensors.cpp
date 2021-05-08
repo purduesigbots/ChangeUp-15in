@@ -24,10 +24,6 @@ bool ejectorDetect() {
 	return (ejector_sensor.get_value() < EJECTOR_THRESHOLD);
 }
 
-bool prox() {
-	return color.get_proximity() > 50;
-}
-
 bool colorDetect() {
 	if (color.get_proximity() > 250) {
 
