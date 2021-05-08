@@ -5,7 +5,7 @@
         "target": "v5",
         "templates": {
             "ARMS": {
-                "location": "C:\\Users\\Owner\\AppData\\Roaming\\PROS\\templates\\ARMS@1.2.22",
+                "location": "C:\\Users\\micah\\AppData\\Roaming\\PROS\\templates\\ARMS@1.3.2",
                 "metadata": {
                     "origin": "local"
                 },
@@ -13,19 +13,19 @@
                 "py/object": "pros.conductor.templates.local_template.LocalTemplate",
                 "supported_kernels": "^3.4.0",
                 "system_files": [
-                    "include\\ARMS\\pid.h",
-                    "include\\ARMS\\chassis.h",
-                    "include\\ARMS\\api.h",
-                    "firmware\\ARMS.a",
                     "include\\ARMS\\arc.h",
+                    "firmware\\ARMS.a",
                     "include\\ARMS\\purepursuit.h",
+                    "include\\ARMS\\chassis.h",
+                    "include\\ARMS\\pid.h",
+                    "include\\ARMS\\api.h",
+                    "include\\ARMS\\selector.h",
                     "include\\ARMS\\config.h",
-                    "include\\ARMS\\odom.h",
-                    "include\\ARMS\\selector.h"
+                    "include\\ARMS\\odom.h"
                 ],
                 "target": "v5",
                 "user_files": [],
-                "version": "1.2.22"
+                "version": "1.3.2"
             },
             "kernel": {
                 "location": "C:\\Users\\micah\\AppData\\Roaming\\PROS\\templates\\kernel@3.4.0",

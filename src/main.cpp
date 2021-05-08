@@ -18,14 +18,14 @@ void initialize() {
 	              10                // joystick threshold
 	);
 
-	pid::init(false,   // debug output
-	          .08, .1, // linear constants
-	          1, 6,    // angular contants
-	          0, 0,    // linear point constants
-	          0, 0,    // angular point constants
-	          .05,     // arc kp
-	          0,       // dif kp
-	          10       // min error
+	pid::init(false,      // debug output
+	          .08, 0, .1, // linear constants
+	          1, 0, 6,    // angular contants
+	          0, 0, 0,    // linear point constants
+	          0, 0, 0,    // angular point constants
+	          .05,        // arc kp
+	          0,          // dif kp
+	          10          // min error
 	);
 	// subsystems
 	intake::init();

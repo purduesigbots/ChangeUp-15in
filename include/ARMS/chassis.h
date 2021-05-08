@@ -29,12 +29,13 @@ extern std::shared_ptr<pros::Imu> imu;
 /**
  * Set the speed of target motor
  */
-void motorMove(std::shared_ptr<okapi::Motor> motor, int speed, bool vel);
+void motorMove(std::shared_ptr<okapi::Motor> motor, double speed, bool vel);
 
 /**
  * Set the speed of target motor group
  */
-void motorMove(std::shared_ptr<okapi::MotorGroup> motor, int speed, bool vel);
+void motorMove(std::shared_ptr<okapi::MotorGroup> motor, double speed,
+               bool vel);
 
 /**
  * Set the brake mode for all chassis motors
@@ -69,7 +70,7 @@ double difference();
 /**
  * Reduce a speed
  */
-double limitSpeed(double speed);
+double limitSpeed(double speed, double max);
 
 /**
  * Get a gradually accelerating speed towards the target input
@@ -145,17 +146,17 @@ void velocity(int t, int left_max = 100, int right_max = 101);
 /**
  * Assign a voltage to each motor on a scale of -100 to 100
  */
-void tank(int left, int right);
+void tank(double left, double right);
 
 /**
  * Assign a voltage to each motor on a scale of -100 to 100
  */
-void arcade(int vertical, int horizontal);
+void arcade(double vertical, double horizontal);
 
 /**
  * Assign a voltage to each motor on a scale of -100 to 100
  */
-void holonomic(int x, int y, int z);
+void holonomic(double x, double y, double z);
 
 /**
  * initialize the chassis
