@@ -117,13 +117,13 @@ void opcontrol() {
 			else if (ejectCount > 0)
 				ejectBalls = 2;
 		}
-		if (sensors::ejectorDetect() && ejectBalls)
-			ejectCount = 80;
-		if (ejectCount > 0) {
-			ejectCount -= 10;
-		} else
+		if (sensors::ejectorDetect() && ejectCount == 0) {
 			ejectBalls--;
-		if (ejectBalls)
+			ejectCount = 80;
+		}
+		if (ejectCount > 0)
+			ejectCount -= 10;
+		if (ejectBalls > 0 || ejectCount > 0)
 			ejector::speed = -100;
 
 		// deploy
