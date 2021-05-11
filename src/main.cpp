@@ -56,7 +56,6 @@ void autonomous() {
 
 void opcontrol() {
 	bool flywheelBall = false;
-	int ejectBalls = 0;
 	int ejectCount = 0;
 	while (true) {
 		// button to start autonomous for testing
@@ -88,7 +87,6 @@ void opcontrol() {
 		if (master.get_digital(DIGITAL_R2)) {
 			intake::speed = -100;
 			ejectCount = 0;
-			ejectBalls = 0;
 		}
 
 		// score
@@ -110,21 +108,14 @@ void opcontrol() {
 		}
 
 		// auto eject
-		if (sensors::colorDetect()) {
-			indexer::speed = 80;
-			if (ejectBalls == 0)
-				ejectBalls = 1;
-			else if (ejectCount > 0)
-				ejectBalls = 2;
-		}
-		if (sensors::ejectorDetect() && ejectBalls)
-			ejectCount = 80;
+		if (sensors::colorDetect())
+			ejectCount = 200;
+
 		if (ejectCount > 0) {
 			ejectCount -= 10;
-		} else
-			ejectBalls--;
-		if (ejectBalls)
+			indexer::speed = 80;
 			ejector::speed = -100;
+		}
 
 		// deploy
 		if (master.get_digital(DIGITAL_X)) {
