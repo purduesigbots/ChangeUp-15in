@@ -2,7 +2,7 @@
 
 namespace flywheel {
 
-okapi::MotorGroup motors = {-9};
+okapi::MotorGroup motors = {-18};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);

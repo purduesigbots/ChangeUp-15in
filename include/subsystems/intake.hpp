@@ -3,14 +3,16 @@
 
 #include "okapi/api.hpp"
 
-namespace intake{
+namespace intake {
 
 extern okapi::MotorGroup motors;
-extern std::shared_ptr<okapi::AsyncPositionController<double, double>> controller;
+extern std::shared_ptr<okapi::AsyncPositionController<double, double>>
+    controller;
 void init();
 void move(int speed);
+bool isMoving();
 void opcontrol();
 
-}
+} // namespace intake
 
 #endif

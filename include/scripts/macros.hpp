@@ -8,5 +8,8 @@ void runUntilFullAsync();
 void score(int num = 1);
 void stopAll();
 void eject();
+void sideSort();
+void backUntilIntake();
+void backUntilIntakeAsync();
 
 #endif

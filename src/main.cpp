@@ -6,16 +6,16 @@ const double tpu = 59;
 void initialize() {
 	selector::init(360, 1);
 
-	chassis::init({-1, -3}, {4, 6}, // motors
-	              600,              // gearset
-	              tpu, 4.75,        // TPU
-	              12,               // setle time
-	              .5, 1,            // linear/angular thresholds
-	              2, 2,             // regular/arc slew
-	              5,                // imu port
-	              {0, 0, 0},        // encoder ports
-	              0,                // expander port
-	              10                // joystick threshold
+	chassis::init({-1, -4, 7}, {3, -8, 9}, // motors
+	              600,                     // gearset
+	              tpu, 4.75,               // TPU
+	              12,                      // setle time
+	              .5, 1,                   // linear/angular thresholds
+	              2, 2,                    // regular/arc slew
+	              5,                       // imu port
+	              {0, 0, 0},               // encoder ports
+	              0,                       // expander port
+	              10                       // joystick threshold
 	);
 
 	pid::init(false,      // debug output

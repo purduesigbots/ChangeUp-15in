@@ -5,6 +5,76 @@
 #include "subsystems/sensors.hpp"
 
 void red() {
+	// Store timestamp at beginning of auton for use in last section
+	int start = millis();
+
+	// drive to ball while deploying
+	chassis::moveAsync(48, 50);
+	intake::move(-100);
+	indexer::move(-100);
+	flywheel::move(-100);
+	delay(500);
+
+	// index preload and eject ball on line
+	stopAll();
+	intake::move(100);
+	runUntilFull();
+	indexer::move(50);
+	ejector::move(-100);
+	chassis::waitUntilSettled();
+
+	// back up, turn, and grab center ball
+	stopAll();
+	chassis::move(-24, 50);
+	chassis::turnAbsolute(-45, 50);
+	intake::move(100);
+	chassis::move(33, 50);
+	stopAll();
+	chassis::move(-33, 50);
+
+	// turn and spit out center ball and face goal
+	chassis::turnAbsolute(180, 50);
+	intake::move(-100);
+	delay(400);
+	chassis::turnAbsolute(140, 50);
+	stopAll();
+
+	// drive to corner goal and cycle
+	intake::move(100);
+	chassis::move(38, 75);
+
+	// score corner
+	indexer::move(100);
+	flywheel::move(100);
+	waitOnColor(2000);
+	intake::move(0);
+	delay(300);
+	stopAll();
+
+	// back up and remove blue ball
+	intake::move(-100);
+	chassis::moveAsync(-48, 30);
+	delay(350);
+	flywheel::move(100);
+	chassis::waitUntilSettled();
+	stopAll();
+
+	// turn and drive to side goal
+	chassis::turnAbsolute(60, 50);
+	intake::move(100);
+	ejector::move(-100);
+	chassis::move(34, 30);
+	sideSort();
+
+	// wait until last second and back up
+	while (millis() - start < 43500)
+		delay(10);
+	chassis::setBrakeMode(okapi::AbstractMotor::brakeMode::coast);
+	intake::move(-50);
+	chassis::move(-20, 100);
+}
+
+void red_old() {
 	// deploy
 	chassis::tank(-20, -20);
 	delay(500);

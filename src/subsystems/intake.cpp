@@ -2,7 +2,7 @@
 
 namespace intake {
 
-okapi::MotorGroup motors = {2, -7};
+okapi::MotorGroup motors = {-6, 2};
 
 void init() {
 	motors.setGearing(okapi::AbstractMotor::gearset::green);
@@ -12,6 +12,10 @@ void init() {
 
 void move(int speed) { // speed from -100 to 100
 	motors.moveVoltage(speed * 120);
+}
+
+bool isMoving() {
+	return (motors.getActualVelocity() > 10);
 }
 
 void opcontrol() {
