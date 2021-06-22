@@ -10,10 +10,10 @@ void waitOnColor(int expiration) {
 		intake::move(-100);
 }
 
-void runUntilFull() {
+void runUntilFull(int flywheelSpeed = 70) {
 	int count = 0;
 	while (!sensors::flywheelDetect() && count < 1000) {
-		flywheel::move(70);
+		flywheel::move(flywheelSpeed);
 		ejector::move(60);
 		indexer::move(100);
 		count += 10;
@@ -22,10 +22,14 @@ void runUntilFull() {
 	ejector::move(0);
 	flywheel::move(0);
 	indexer::move(0);
+
 }
 
 void runUntilFullAsync() {
-	Task runUntilFullTask(runUntilFull);
+	Task([](){
+		runUntilFull(50);
+		while(1) delay(20);
+	});
 }
 
 void score(int num) {
@@ -65,7 +69,7 @@ void stopAll() {
 }
 
 void eject() {
-	indexer::move(-20);
+	indexer::move(20);
 	flywheel::move(-80);
 	ejector::move(-100);
 	intake::move(-100);
@@ -79,4 +83,45 @@ void runUntilFullReverse() {
 		delay(10);
 	}
 	flywheel::move(0);
+}
+
+void autoSort(int balls) {
+	intake::move(100);
+	indexer::move(60);
+	flywheel::move(100);
+	ejector::move(100);
+
+	int count = 0;
+	int ballCount = 0;
+	bool ejecting = false;
+	bool detect = false;
+
+	while (count < 2000 * balls && (ballCount < balls || ejecting)) {
+		if (sensors::ballDetect() && !detect) {
+			ballCount++;
+		}
+		detect = sensors::ballDetect();
+		if (sensors::colorDetect() && !ejecting) {
+			ejector::move(-80);
+			ejecting = true;
+		}
+		if (ejecting && sensors::ejectorDetect()) {
+			ejecting = false;
+			ejector::move(100);
+		}
+		if (ballCount >= balls)
+			count = 0;
+
+		chassis::arcade(count < 500 ? 30 : ((count % 500 - 250) / 8), 0);
+
+		delay(10);
+		count += 10;
+	}
+
+	chassis::arcade(20, 0);
+	intake::move(-100);
+	delay(1000);
+
+	chassis::arcade(0, 0);
+	stopAll();
 }

@@ -40,4 +40,8 @@ bool colorDetect() {
 	return false;
 }
 
+bool ballDetect() {
+	return color.get_proximity() > 250;
+}
+
 } // namespace sensors

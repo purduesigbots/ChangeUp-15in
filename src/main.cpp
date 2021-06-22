@@ -8,7 +8,7 @@ void initialize() {
 	chassis::init({-1, -4	, 7}, {3, 9, -8}, // motors
 	              600,              // gearset
 	              tpu, 4.75,        // TPU
-	              12,               // setle time
+	              5, // 12          // setle time
 	              .5, 1,            // linear/angular thresholds
 	              2, 2,             // regular/arc slew
 	              5,                // imu port
@@ -17,11 +17,20 @@ void initialize() {
 	              10                // joystick threshold
 	);
 
+	odom::init(false,
+						 0,
+						 0,
+						 tpu,
+						 tpu,
+						 false,		// holonomic
+						 10				// exit error
+	);
+
 	pid::init(false,   // debug output
-	          .08, .1, // linear constants
+	          .1, .1,  // linear constants 		 .08, .1
 	          1, 6,    // angular contants
-	          0, 0,    // linear point constants
-	          0, 0,    // angular point constants
+	          5, 1,    // linear point constants
+	          5, 5,    // angular point constants
 	          .05,     // arc kp
 	          0,       // dif kp
 	          10       // min error
@@ -42,11 +51,17 @@ void competition_initialize() {
 
 void autonomous() {
 	switch (selector::auton) {
+	case -2:
+		blue_wall();
+		break;
 	case -1:
 		blue();
 		break;
 	case 1:
 		red();
+		break;
+	case 2:
+		red_wall();
 		break;
 	case 0:
 		skills();

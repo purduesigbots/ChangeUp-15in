@@ -2,5 +2,6 @@
 #define _BLUE_HPP_
 
 void blue();
+void blue_wall();
 
 #endif
