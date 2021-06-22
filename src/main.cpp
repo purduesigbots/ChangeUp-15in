@@ -5,7 +5,7 @@ const double tpu = 59;
 void initialize() {
 	selector::init(360, 1);
 
-	chassis::init({-1, -3}, {4, 6}, // motors
+	chassis::init({-1, -4	, 7}, {3, 9, -8}, // motors
 	              600,              // gearset
 	              tpu, 4.75,        // TPU
 	              12,               // setle time
@@ -56,12 +56,16 @@ void autonomous() {
 
 void opcontrol() {
 	bool flywheelBall = false;
-	int ejectBalls = 0;
+	bool ejecting = false;
+	//bool sorting = true;
 	int ejectCount = 0;
 	while (true) {
 		// button to start autonomous for testing
 		if (master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
 			autonomous();
+
+		//if (master.get_digital_new_press(DIGITAL_UP) && !competition::is_connected())
+		//	selector::auton *= -1;
 
 		// stop all subsystems
 		intake::speed = 0;
@@ -87,8 +91,9 @@ void opcontrol() {
 		// outtake and ejector reset
 		if (master.get_digital(DIGITAL_R2)) {
 			intake::speed = -100;
+			ejecting = false;
 			ejectCount = 0;
-			ejectBalls = 0;
+			//ejectBalls = 0;
 		}
 
 		// score
@@ -109,7 +114,32 @@ void opcontrol() {
 			ejector::speed = -100;
 		}
 
+		//if (master.get_digital_new_press(DIGITAL_DOWN)) {
+		//	sorting = !sorting;
+		//	ejecting = false;
+		//}
+
 		// auto eject
+		//if (sorting) {
+		if (sensors::colorDetect()) {
+			ejecting = true;
+			indexer::speed = 80;
+			ejectCount = 0;
+		}
+		if (ejecting) {
+			ejector::speed = -100;
+			ejectCount += 10;
+			if (ejectCount >= 100)
+				ejector::speed = -100;
+		}
+
+		if (ejecting && sensors::ejectorDetect()) {
+			ejecting = false;
+			ejectCount = 0;
+		}
+		//}
+
+		/*
 		if (sensors::colorDetect()) {
 			indexer::speed = 80;
 			if (ejectBalls == 0)
@@ -125,6 +155,7 @@ void opcontrol() {
 			ejectCount -= 10;
 		if (ejectBalls > 0 || ejectCount > 0)
 			ejector::speed = -100;
+		*/
 
 		// deploy
 		if (master.get_digital(DIGITAL_X)) {

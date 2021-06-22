@@ -3,7 +3,7 @@
 
 namespace ejector {
 
-okapi::MotorGroup motors = {-8};
+okapi::MotorGroup motors = {16};
 int speed = 0;
 
 void init() {

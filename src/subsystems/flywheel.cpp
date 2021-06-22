@@ -2,7 +2,7 @@
 
 namespace flywheel {
 
-okapi::MotorGroup motors = {-9};
+okapi::MotorGroup motors = {-18};
 int speed = 0;
 
 void init() {

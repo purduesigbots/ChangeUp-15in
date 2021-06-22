@@ -2,7 +2,7 @@
 
 namespace intake {
 
-okapi::MotorGroup motors = {2, -7};
+okapi::MotorGroup motors = {2, -6};
 int speed = 0;
 
 void init() {
