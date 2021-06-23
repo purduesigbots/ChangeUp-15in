@@ -156,7 +156,7 @@ void red_wall() {
 	stopAll();
 
 	// turn and remove blue ball
-	chassis::turnAbsolute(120, 50);
+	chassis::turnAbsolute(100, 50);
 	intake::move(-50);
 	indexer::move(-100);
 	flywheel::move(-50);

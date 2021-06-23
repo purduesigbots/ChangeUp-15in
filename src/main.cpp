@@ -3,7 +3,8 @@
 pros::Controller master(CONTROLLER_MASTER);
 const double tpu = 59;
 void initialize() {
-	selector::init(360, 1);
+	const char* b[] = {"Main", "Wall", ""};
+	selector::init(360, 1, b);
 
 	chassis::init({-1, -4	, 7}, {3, 9, -8}, // motors
 	              600,              // gearset
@@ -51,11 +52,12 @@ void competition_initialize() {
 
 void autonomous() {
 	switch (selector::auton) {
-	case -2:
-		blue_wall();
-		break;
+
 	case -1:
 		blue();
+		break;
+	case -2:
+		blue_wall();
 		break;
 	case 1:
 		red();
