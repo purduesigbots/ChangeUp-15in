@@ -10,7 +10,17 @@ void waitOnColor(int expiration) {
 		intake::move(-100);
 }
 
-void runUntilFull(int flywheelSpeed = 70) {
+
+void waitOnOurColor(int expiration) {
+	int count = 0;
+		while (sensors::colorDetect() && count < expiration) {
+		count += 10;
+		delay(10);
+	}
+}
+
+
+void runUntilFull(int flywheelSpeed) {
 	int count = 0;
 	while (!sensors::flywheelDetect() && count < 1000) {
 		flywheel::move(flywheelSpeed);
@@ -87,7 +97,7 @@ void runUntilFullReverse() {
 
 void autoSort(int balls) {
 	intake::move(100);
-	indexer::move(60);
+	indexer::move(50);
 	flywheel::move(100);
 	ejector::move(100);
 
@@ -112,15 +122,31 @@ void autoSort(int balls) {
 		if (ballCount >= balls)
 			count = 0;
 
-		chassis::arcade(count < 500 ? 30 : ((count % 500 - 250) / 8), 0);
+		chassis::arcade(count < 500 ? 30 : ((count % 500 - 250) / 10), 0);
 
 		delay(10);
 		count += 10;
 	}
 
-	chassis::arcade(20, 0);
+	count = 0;
+	ejecting = false;
 	intake::move(-100);
-	delay(1000);
+
+	while (count < 1000) {
+		if (sensors::colorDetect() && !ejecting) {
+			ejector::move(-80);
+			ejecting = true;
+		}
+		if (ejecting && sensors::ejectorDetect()) {
+			ejecting = false;
+			ejector::move(100);
+		}
+
+		chassis::arcade(20, 0);
+
+		delay(10);
+		count += 10;
+	}
 
 	chassis::arcade(0, 0);
 	stopAll();

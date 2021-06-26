@@ -2,7 +2,8 @@
 #define _MACROS_HPP_
 
 void waitOnColor(int expiration);
-void runUntilFull(int flywheelSpeed);
+void waitOnOurColor(int expiration);
+void runUntilFull(int flywheelSpeed = 70);
 void runUntilFullReverse();
 void runUntilFullAsync();
 void score(int num = 1);

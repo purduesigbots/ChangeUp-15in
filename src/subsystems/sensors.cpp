@@ -40,6 +40,17 @@ bool colorDetect() {
 	return false;
 }
 
+bool ourColorDetect() {
+	if (color.get_proximity() > 250) {
+
+		if (selector::auton > 0)
+			return (color.get_hue() <= RED) ? true : false;
+		if (selector::auton < 0)
+			return (color.get_hue() >= BLUE) ? true : false;
+	}
+	return false;
+}
+
 bool ballDetect() {
 	return color.get_proximity() > 250;
 }

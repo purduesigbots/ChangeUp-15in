@@ -1,12 +1,12 @@
 #include "ARMS/chassis.h"
 #include "main.h"
 
-void blue() {
+void blue(int end) {
 	// same as red but colors flipped
-	red();
+	red(end);
 }
 
-void blue_wall() {
+void blue_wall(int end) {
 	// same as red but colors flipped
-	red_wall();
+	red_wall(end);
 }

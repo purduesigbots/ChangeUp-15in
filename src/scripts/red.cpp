@@ -4,7 +4,11 @@
 #include "subsystems/intake.hpp"
 #include "subsystems/sensors.hpp"
 
-void red() {
+// Different end values
+// 1 sorts right goal and covers until end
+// 2 goes across the field and covers left side goal until end
+// 3 goes across the field and sorts left side goal
+void red(int end) {
 	// Store timestamp at beginning of auton for use in last section
 	int start = millis();
 
@@ -25,14 +29,14 @@ void red() {
 	indexer::move(50);
 	ejector::move(-100);
 	chassis::waitUntilSettled();
+	chassis::turnAbsolute(0, 35);
 
 	// back up and turn towards center ball
 	chassis::move(-22, 50);
 	ejector::move(0);
 	indexer::move(0);
-	chassis::turnAbsoluteAsync(-45, 50);
 	flywheel::move(-50);
-	chassis::waitUntilSettled();
+	chassis::turnAbsolute(-45, 50);
 	flywheel::move(0);
 
 	// grab center ball
@@ -45,29 +49,32 @@ void red() {
 	chassis::turnAbsolute(215, 50);
 	intake::move(-100);
 	indexer::move(-100);
-	delay(200);
-	for (int i = 0; i < 400; i += 10) {
-			indexer::move(sensors::colorDetect() ? -100 : 0);
-			delay(10);
+	for (int i = 0; i < 500; i += 10) {
+		indexer::move(sensors::colorDetect() ? -100 : 0);
+		delay(10);
 	}
+	indexer::move(0);
 	chassis::turnAbsolute(140, 50);
 	intake::move(100);
-	chassis::move(38, 75);
+	chassis::move(38, 50);
 
 	// score corner
+	chassis::arcade(25, 0);
 	indexer::move(100);
 	flywheel::move(100);
 	ejector::move(100);
 	waitOnColor(2000);
-	intake::move(0);
+	intake::move(-50);
+	indexer::move(25);
+	delay(200);
 	indexer::move(0);
-	delay(400);
+	delay(200);
 	stopAll();
 
 	// back up and remove blue ball
 	intake::move(-25);
 	ejector::move(25);
-	chassis::moveAsync(-47, 30);
+	chassis::moveAsync(-48, 30);
 	delay(500);
 	intake::move(-75);
 	indexer::move(-100);
@@ -76,45 +83,53 @@ void red() {
 	chassis::waitUntilSettled();
 	stopAll();
 
+
 	// turn and drive to side goal
 	chassis::turnAbsolute(60, 50);
 	intake::move(100);
 	ejector::move(-100);
-	chassis::move(32, 30);
+	chassis::move(33, 30);
 	autoSort(3);
 
-	// back up, turn, and go accross field
-	chassis::move(-20, 50);
-	chassis::turnAbsolute(-90, 35);
-	chassis::arcade(-35, 0);
-	delay(2000);
-	chassis::arcade(0, 0);
+	if (end >= 2) {
+		// back up, turn, square with wall
+		chassis::turnAbsolute(60, 50);
+		chassis::move(-20, 50);
+		chassis::turnAbsolute(-90, 35);
+		chassis::arcade(-35, 0);
+		delay(2000);
+		chassis::arcade(0, 0);
 
-	printf("%d\n", millis() - start);
-	// If time is past 35 seconds, don't go across field
-	if(millis() - start < 35000) {
-		intake::move(100);
-		indexer::move(100);
-		ejector::move(-100);
-		chassis::move(100, 75);
+		printf("%d\n", millis() - start);
+		// If time is past 35 seconds, don't go across field
+		if (millis() - start < 35000) {
+			intake::move(100);
+			indexer::move(100);
+			ejector::move(-100);
+			chassis::move(95, 75);
+			stopAll();
 
-		// turn towards side goal and drive in
-		chassis::turnAbsolute(-55, 35);
-		intake::move(100);
-		chassis::move(30, 40);
-		autoSort(3);
-
-		printf("%.2f\n", (double)(millis() - start) / 1000);
-
-		// wait until last second and back up
-		while (millis() - start < 43500)
-			delay(10);
-		intake::move(-50);
-		chassis::move(-20, 100);
+			// turn towards side goal and drive in
+			chassis::turnAbsolute(-55, 35);
+			if (end == 3)
+				intake::move(100);
+			chassis::move(33, 40);
+			if (end == 3)
+				autoSort(3);
+		}
 	}
+	// print end time before waiting
+	printf("%.2f\n", (double)(millis() - start) / 1000);
+	stopAll();
+
+	// wait until last second and back up
+	while (millis() - start < 44000)
+		delay(10);
+	intake::move(-50);
+	chassis::move(-20, 50);
 }
 
-void red_wall() {
+void red_wall(int end) {
 	// Store timestamp at beginning of auton for use in last section
 	int start = millis();
 
@@ -171,6 +186,14 @@ void red_wall() {
 	chassis::move(32, 30);
 	autoSort(3);
 
+	// wait until last second and back up
+	while (millis() - start < 44000)
+		delay(10);
+	intake::move(-50);
+	chassis::move(-20, 100);
+
+	/*
+
 	// back up, turn, and align with wall
 	chassis::move(-20, 50);
 	chassis::turnAbsolute(-90, 35);
@@ -186,15 +209,14 @@ void red_wall() {
 
 	// turn towards side goal and drive in
 	chassis::turnAbsolute(-55, 35);
-	intake::move(50);
 	chassis::move(30, 40);
-	intake::move(0);
 
 	// wait until last second and back up
-	while (millis() - start < 40000)
+	while (millis() - start < 44000)
 		delay(10);
-	autoSort(3);
+	intake::move(-50);
 	chassis::move(-20, 100);
+	*/
 }
 
 void red_odom() {

@@ -3,7 +3,7 @@
 pros::Controller master(CONTROLLER_MASTER);
 const double tpu = 59;
 void initialize() {
-	const char* b[] = {"Main", "Wall", ""};
+	const char* b[] = {"Main", "Cross Block", "Cross Sort", "Wall", ""};
 	selector::init(360, 1, b);
 
 	chassis::init({-1, -4	, 7}, {3, 9, -8}, // motors
@@ -54,16 +54,28 @@ void autonomous() {
 	switch (selector::auton) {
 
 	case -1:
-		blue();
+		blue(1);
 		break;
 	case -2:
-		blue_wall();
+		blue(2);
+		break;
+	case -3:
+		blue(3);
+		break;
+	case -4:
+		blue_wall(1);
 		break;
 	case 1:
-		red();
+		red(1);
 		break;
 	case 2:
-		red_wall();
+		red(2);
+		break;
+	case 3:
+		red(3);
+		break;
+	case 4:
+		red_wall(1);
 		break;
 	case 0:
 		skills();
@@ -110,7 +122,6 @@ void opcontrol() {
 			intake::speed = -100;
 			ejecting = false;
 			ejectCount = 0;
-			//ejectBalls = 0;
 		}
 
 		// score
@@ -136,8 +147,6 @@ void opcontrol() {
 		//	ejecting = false;
 		//}
 
-		// auto eject
-		//if (sorting) {
 		if (sensors::colorDetect()) {
 			ejecting = true;
 			indexer::speed = 80;
@@ -154,25 +163,6 @@ void opcontrol() {
 			ejecting = false;
 			ejectCount = 0;
 		}
-		//}
-
-		/*
-		if (sensors::colorDetect()) {
-			indexer::speed = 80;
-			if (ejectBalls == 0)
-				ejectBalls = 1;
-			else if (ejectCount > 0)
-				ejectBalls = 2;
-		}
-		if (sensors::ejectorDetect() && ejectCount == 0) {
-			ejectBalls--;
-			ejectCount = 80;
-		}
-		if (ejectCount > 0)
-			ejectCount -= 10;
-		if (ejectBalls > 0 || ejectCount > 0)
-			ejector::speed = -100;
-		*/
 
 		// deploy
 		if (master.get_digital(DIGITAL_X)) {
@@ -182,15 +172,13 @@ void opcontrol() {
 		}
 
 		// chassis
-		// scale turnSpeed with a parabolic function
+		double a = 1.5; // lower = linear, higher = cubic; cannot be 0
+		double throttleInput = master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127.0;
+		double throttleSpeed = a * (pow(throttleInput, 3) / 10000 + throttleInput / a) / (a + 1);
 		double turnInput = master.get_analog(ANALOG_RIGHT_X) * (double)100 / 127.0;
-		double turnSpeed = turnInput * 0.09;
-		turnSpeed *= turnSpeed;
-		turnSpeed += 10;
-		if (turnInput < 0)
-			turnSpeed *= -1;
-		chassis::arcade(master.get_analog(ANALOG_LEFT_Y) * (double)100 / 127.0,
-		                turnSpeed);
+		double turnSpeed = a * (pow(turnInput, 3) / 10000 + turnInput / a) / (a + 1);
+
+		chassis::arcade(throttleSpeed, turnSpeed);
 
 		// update subsystems
 		intake::move(intake::speed);
