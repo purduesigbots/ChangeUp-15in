@@ -10,6 +10,10 @@ consistent autonomous programs.
 In order to reduce the amount of redundant code between the robots,
 we packaged the most important stuff into libraries for easy reuse.
 
+### ARMS
+This library includes the autoSelector and Greenhat (now just called ARMS)
+all future work is done [here](https://github.com/purduesigbots/ARMS).
+
 ### Greenhat
 This library handles chassis movement.
 Any function that moves the robot around the field will be controlled by functions
